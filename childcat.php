@@ -15,7 +15,7 @@
       <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="container">
-            <h1 class="mua_acc_taital">DANH MỤC ACC EFOOTBALL MOBILE</h1>
+            <h1 class="mua_acc_taital"></h1>
             <div class="mua_acc_section_2">
               <div class="row">
                 <?php foreach($childcategories as $childcat): ?>

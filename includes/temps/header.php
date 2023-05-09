@@ -49,6 +49,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" href="<?php echo $css?>bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo $css?>all.min.css">
+    <link rel="stylesheet" href="<?php echo $css?>front.css">
     <link rel="stylesheet" href="<?php echo $css?>frontend.css">
     <link rel="stylesheet" href="<?php echo $css?>bootstrap-icons.css">
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

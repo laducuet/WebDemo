@@ -37,7 +37,7 @@ hr{
 }
 /* Header Styling */
 header{
-	height: 220px;
+	height: 160px;
 	background-color: var(--khaki);
 }
 header .brand{
