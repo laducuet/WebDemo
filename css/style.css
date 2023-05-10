@@ -1,9 +1,9 @@
 /* Variriables */
 :root{
 	--khaki: #4fcc6f;
-	--khakiDark: #23a029;
-	--darkStaleGray: #2F4F4F;
-	--white: #f4f0f0;
+	--khakiDark: #1fc052;
+	--darkStaleGray: #ba5119f9;
+	--white: #ffffff;
 }
 /* Import Font */
 @font-face{
@@ -32,8 +32,8 @@ hr{
 	margin: 0 auto;
 }
 .active{
-	background-color: var(--darkStaleGray) !important;
-	color: var(--khaki) !important;
+	background-color: #fff ;
+    color: var(--khaki) ;
 }
 /* Header Styling */
 header{
@@ -68,7 +68,7 @@ header .logo p.big-logo{
 header .logo p.small-logo{
 	font-size: 24px;
 	font-weight: bold;
-	color: var(--khakiDark);
+	color: #ba5119f9;
 	text-transform: uppercase;
 	letter-spacing: 3px;
 }
@@ -367,7 +367,7 @@ footer .footer-widget .widget{
 	height: 170px;
 	padding: 20px;
 	color: var(--white);
-	background-color: var(--darkStaleGray);
+    background-color: #0d6efd82;
 }
 footer .footer-widget .widget h3{
 	font-size: 14px;

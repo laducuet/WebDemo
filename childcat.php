@@ -10,7 +10,7 @@
   }
 ?>
 
-<div class="mua_acc_section">
+
     <div id="main_slider" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -60,13 +60,18 @@
                   </div>
                   <?php endforeach; ?>
               </div>
+
             </div>
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
-<?php 
+  <?php 
 include $tpl . 'footer.php';
 ob_end_flush();
 ?>
