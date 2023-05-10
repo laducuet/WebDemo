@@ -701,17 +701,7 @@ form input {
     font-size: 16px;
 }
 
-form button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
+
 
 form button:hover {
     background-color: #2980b9;
