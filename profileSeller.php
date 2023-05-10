@@ -54,6 +54,15 @@ $deletedItems = getSellerDeletedItems($_SESSION['id'], $db);
           </h5>
         </a>
       </div>
+      
+      <div class="m-2">
+        <h4 class="d-inline-block">Balance: </h4>
+        <a href="mailto:<?= $sellerData["Amount"] ?>" class="mb-2 link-dark fa-1x ">
+          <h5 class="text-muted d-inline-block">
+            <?= $sellerData["Amount"] ?>$
+          </h5>
+        </a>
+      </div>
       <div class="m-2">
         <h4 class="d-inline-block">Mobile: </h4>
         <h5 class="mb-2 text-muted d-inline-block ">
@@ -76,6 +85,7 @@ $deletedItems = getSellerDeletedItems($_SESSION['id'], $db);
       <a href="EditProfile.php" class="link-dark"><i class="bi bi-pencil fa-3x"></i></a>
     </div>
   </div>
+
 
 
   <!------------------------------------------------>

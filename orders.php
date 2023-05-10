@@ -57,6 +57,13 @@ else if (isset($_GET['acceptOrderId'])) {
     incrementBuyer_SellerTransactions($_GET['buyerId'],$_SESSION['id'],$_GET['buyerUserName'],$_SESSION['username'],$db);
     setOrderAccepted($_GET['acceptOrderId'], $db);
     setisSaled($_GET['itemid'],$db);
+    $amount_buyer = getAmountBuyerId($_GET['buyerId'], $db);
+    $amount_seller = getAmountSellerId($_SESSION['id'], $db);
+    $Money = getOrderPrice($_GET['acceptOrderId'], $db);
+    $amount_buyer = $amount_buyer - $Money;
+    $amount_seller = $amount_seller + $Money;
+    updateAmountBuyerId($_GET['buyerId'], $amount_buyer, $db);
+    updateAmountSellerId($_SESSION['id'], $amount_seller, $db);
     ?>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">

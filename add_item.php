@@ -14,6 +14,7 @@ if (isset($_POST['done'])) {
     $_SESSION["discount_item"] = "";
     $_SESSION["quantity_item"] = "";
     $_SESSION["description_item"] = "";
+    $_SESSION["information_item"] = "";
     $_SESSION["city"] = "";
     $_SESSION["country"] = "";
     $_SESSION["childcategoryId"] = "";
@@ -27,6 +28,7 @@ if (isset($_POST['done'])) {
     $_SESSION["discount_item"] = input_data($_POST['discountOfItem']);
     $_SESSION["quantity_item"] = input_data($_POST['quantity']);
     $_SESSION["description_item"] = input_data($_POST['description']);
+    $_SESSION["information_item"] = input_data($_POST['information']);
     $_SESSION["city"] = input_data($_POST['city']);
     $_SESSION["country"] = input_data($_POST['country']);
     $_SESSION["childcategoryId"] = input_data($_POST['childcategory']);
@@ -95,7 +97,7 @@ if (isset($_POST['done'])) {
     }
 
     if ($_SESSION['home_er'] == "" && $_SESSION['quantity_er'] == "" && $_SESSION['description_er'] == "" && $_SESSION['item_namerr'] == "" && $_SESSION["pricerr"] == "" && $_SESSION["childcat_er"] == "" && $_SESSION["country_er"] == "" && $_SESSION["st_er"] == "") {
-        insertItem($_SESSION['item_name'], $_SESSION['description_item'], $_SESSION['price'], $_SESSION['quantity_item']
+        insertItem($_SESSION['item_name'], $_SESSION['description_item'], $_SESSION['information_item'], $_SESSION['price'], $_SESSION['quantity_item']
             , $_SESSION['childcategoryId'], $_SESSION['discount_item'], $_SESSION['id'], $_SESSION['homeNum'], $_SESSION['st'],
             $_SESSION['city'], $_SESSION['country'], $db);
         $_SESSION["item_name"] = "";
@@ -103,6 +105,7 @@ if (isset($_POST['done'])) {
         $_SESSION["discount_item"] = "";
         $_SESSION["quantity_item"] = "";
         $_SESSION["description_item"] = "";
+        $_SESSION["information_item"] = "";
         $_SESSION["city"] = "";
         $_SESSION["country"] = "";
         $_SESSION["childcategoryId"] = "";
@@ -143,6 +146,7 @@ if (isset($_POST['done'])) {
         $_SESSION["discount_item"] = "";
         $_SESSION["quantity_item"] = "";
         $_SESSION["description_item"] = "";
+        $_SESSION["information_item"] = "";
         $_SESSION["city"] = "";
         $_SESSION["country"] = "";
         $_SESSION["childcategoryId"] = "";
@@ -186,6 +190,14 @@ if (isset($_POST['done'])) {
                                 echo $_SESSION["description_er"];
                                 unset($_SESSION["description_er"]);
                             } ?></p>
+                            <div class=" mb-4 input-group">
+            <textarea placeholder="Information(For Game)" rows="2" class="form-control" id="exampleFormControlTextarea1"
+                      name="information"><?php if (isset($_SESSION["information_item"])) {
+                    echo $_SESSION["information_item"];
+                    unset($_SESSION["information_item"]);
+                }; ?></textarea>
+                        </div>
+                        
                         <div class="input-group  mb-4">
                             <select required value="<?php if (isset($_SESSION["childcategoryId"])) {
                                 echo $_SESSION["childcategoryId"];

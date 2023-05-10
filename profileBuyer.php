@@ -18,6 +18,7 @@ $orderedItems = getBuyerOrderedItems($_SESSION['id'], $db);
 $pendingOrderedItems = getBuyerPendingOrderedItems($_SESSION['id'], $db);
 $acceptedOrderedItems = getBuyerAcceptedOrderedItems($_SESSION['id'], $db);
 $rejectedOrderedItems = getBuyerRejectedOrderedItems($_SESSION['id'], $db);
+
 ?>
 
 
@@ -32,6 +33,13 @@ $rejectedOrderedItems = getBuyerRejectedOrderedItems($_SESSION['id'], $db);
                     <a href="mailto:<?= $buyerData["email"] ?>"  class="mb-2 link-dark fa-1x "><h5
                             class="text-muted d-inline-block">
                             <?=$buyerData["email"]?>
+                        </h5></a>
+                </div>
+                <div class="m-2">
+                    <h4 class="d-inline-block">Balance: </h4>
+                    <a href="mailto:<?= $buyerData["Amount"] ?>"  class="mb-2 link-dark fa-1x "><h5
+                            class="text-muted d-inline-block">
+                            <?=$buyerData["Amount"]?>$
                         </h5></a>
                 </div>
                 <div class="m-2">
@@ -218,6 +226,7 @@ $rejectedOrderedItems = getBuyerRejectedOrderedItems($_SESSION['id'], $db);
                                 <h5 class="card-title">' . $orderedItem->title . '</h5>
                                 <h6 class="card-title">' . $childcategory->childcategoryName . '</h6>
                                 <p class="card-text">' . $orderedItem->description . '</p>
+                                <p class="card-text">' . $orderedItem->information . '</p>
                                 <h6 class="card-title">' . $orderedItem->orderPrice . '$</h6>
                                 <h6 class="card-title"> Quantity: ' . $orderQuantity . '</h6>
                                 <h6 class="card-title">' . $orderedItem->orderDate . '</h6>

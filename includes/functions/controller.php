@@ -246,9 +246,9 @@ function insertSellerPhoneNumber($id,$mobile,$db){
 }
 // Add Item
 
-function insertItem($title,$Des,$price,$quantity,$childcatId,$discount,$sellerid,$homeNum,$street,$city,$country,$db){
-    $sql="INSERT INTO item ( title, description, price, quantity, childcategoryId,sellerId,discount,homeNumber,street,city,country)
-    VALUES ('".$title."', '".$Des."', ".$price.", ".$quantity.", ".$childcatId.",".$sellerid.",".$discount.", ".$homeNum.",'".$street."','".$city."','".$country."')";
+function insertItem($title,$Des,$info,$price,$quantity,$childcatId,$discount,$sellerid,$homeNum,$street,$city,$country,$db){
+    $sql="INSERT INTO item ( title, description, information , price, quantity, childcategoryId,sellerId,discount,homeNumber,street,city,country)
+    VALUES ('".$title."', '".$Des."','".$info."' , ".$price.", ".$quantity.", ".$childcatId.",".$sellerid.",".$discount.", ".$homeNum.",'".$street."','".$city."','".$country."')";
     $stmt=$db->prepare($sql);
     $stmt->execute();
     }
@@ -346,6 +346,33 @@ function getSellerMobiles($id, $db)
     return $rows;
 }
 
+function getAmountBuyerId($id, $db)
+{
+    $sql = "SELECT Amount FROM buyer WHERE ID = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(":id" => $id));
+    $amount = $stmt->fetchColumn();
+    return $amount;
+}
+
+function getAmountSellerId($id, $db)
+{
+    $sql = "SELECT Amount FROM seller WHERE ID = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(":id" => $id));
+    $amount = $stmt->fetchColumn();
+    return $amount;
+}
+
+function getOrderPrice($id, $db)
+{
+    $sql = "SELECT orderPrice FROM orders WHERE orderId = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(":id" => $id));
+    $amount = $stmt->fetchColumn();
+    return $amount;
+}
+
 function getSellerForSaleItems($id, $db)
 {
     $sql = "SELECT * FROM seller,item WHERE seller.ID = item.sellerId AND item.isDeleted = 0 AND item.quantity != 0 AND seller.ID = :id";
@@ -401,6 +428,20 @@ function shallowDeleteItem($id, $db)
 function retrieveItem($id, $db)
 {
     $sql = "UPDATE item set item.isDeleted = 0 WHERE itemId = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(":id" => $id));
+}
+
+function updateAmountBuyerId($id,$money, $db)
+{
+    $sql = "UPDATE buyer set buyer.Amount = $money WHERE ID = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(":id" => $id));
+}
+
+function updateAmountSellerId($id,$money, $db)
+{
+    $sql = "UPDATE seller set seller.Amount = $money WHERE ID = :id";
     $stmt = $db->prepare($sql);
     $stmt->execute(array(":id" => $id));
 }
