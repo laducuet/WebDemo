@@ -66,11 +66,12 @@ header("Location: signin.php");
 						</div>
 					</div>
 					<div class="dropdown">
-            <?php if($_SESSION["typeOfUser"]==="buyer"): ?>
-              <a href="<?php echo "cart.php?username=".$User[0]['userName']?>">
-                <img src="img/icons/shopping_cart.png">
-              </a>
-            <?php endif; ?>
+						<?php if($_SESSION["typeOfUser"]==="buyer"): ?>
+						<a href="<?php echo "cart.php?username=".$User[0]['userName']?>">
+							<img src="img/icons/shopping_cart.png">
+						</a>
+						<?php endif; ?>
+						<img src="img/icons/shopping_cart.png">
 					</div>
           <div class="dropdown">
 						<img src="img/icons/heart.png">
@@ -84,7 +85,7 @@ header("Location: signin.php");
 		<div class="container">
 			<div class="brand">
 				<div class="logo">
-					<a href="index.html">
+					<a href="index.php">
 						<img src="img/icons/online_shopping.png">
 						<div class="logo-text">
 							<p class="big-logo">Ecommerce</p>

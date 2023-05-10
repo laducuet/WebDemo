@@ -45,8 +45,11 @@
                         ?>
                         </span>
                       </p>
-                      <div class="tshirt_img">s
-                        <img src="images/{items['description']}.png" />
+                      <div class="tshirt_img">
+                          <img src="<?php
+                            $image_path = "layout/images/" . $childcat['childcategoryName'] . ".jpg";
+                            echo $image_path;
+                          ?>">
                       </div>
                       <div class="see_all">
                         <ul>

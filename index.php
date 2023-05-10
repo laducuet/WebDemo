@@ -73,7 +73,7 @@
 								<a href="<?php echo "childcat.php?cat=".urlencode($cat['categoryId']); ?>">
 									<img src="<?php
 										$image_path = "layout/images/" . $cat['categoryName'] . ".png";
-										echo $image_path 
+										echo $image_path;
 									?>">
 								</a>
 								<div class="product-detail">
@@ -89,61 +89,6 @@
 			</div>		
 		</main> <!-- Main Area -->
 	</div>
-
-	<footer>
-		<div class="container">
-			<div class="footer-widget">
-				<div class="widget">
-					<div class="widget-heading">
-						<h3>Important Link</h3>
-					</div>
-					<div class="widget-content">
-						<ul>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
-							<li><a href="refund.html">Refund Policy</a></li>
-							<li><a href="terms.html">Terms & Conditions</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="widget">
-					<div class="widget-heading">
-						<h3>Information</h3>
-					</div>
-					<div class="widget-content">
-						<ul>
-							<li><a href="account.html">My Account</a></li>
-							<li><a href="orders.html">My Orders</a></li>
-							<li><a href="cart.html">Cart</a></li>
-							<li><a href="checkout.html">Checkout</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="widget">
-					<div class="widget-heading">
-						<h3>Follow us</h3>
-					</div>
-					<div class="widget-content">
-						<div class="follow">
-							<ul>
-								<li><a href="#"><img src="img/icons/facebook.png"></a></li>
-								<li><a href="#"><img src="img/icons/twitter.png"></a></li>
-								<li><a href="#"><img src="img/icons/instagram.png"></a></li>
-							</ul>
-						</div>						
-					</div>
-					<div class="widget-heading">
-						<h3>Subscribe for Newsletter</h3>
-					</div>
-					<div class="widget-content">
-						<div class="subscribe">
-							<form>
-								<div class="form-group">
-									<input type="text" class="form-control" name="subscribe" placeholder="Email">
-									<img src="img/icons/paper_plane.png">
-								</div>
-							</form>
-						</div>						
-					</div>
-				</div>
-			</div> <!-- Footer Widget -->
+<?php
+include $tpl . "footer.php";
+ob_end_flush(); ?>	
