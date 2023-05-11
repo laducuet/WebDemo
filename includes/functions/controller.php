@@ -9,6 +9,25 @@ function getItems($db)
     return $result;
 }
 
+function getCategoryNameById($db, $itemId)
+{
+ $sql = "SELECT category.categoryName FROM item JOIN childcategory ON item.childcategoryId = childcategory.childcategoryId JOIN category ON childcategory.categoryId = category.categoryId WHERE item.itemId = :itemId";
+ $stmt = $db->prepare($sql);
+ $stmt->bindParam(':itemId', $itemId);
+ $stmt->execute();
+ $result = $stmt->fetch(PDO::FETCH_ASSOC);
+ return $result['categoryName'];
+}
+
+function getPriceById($db, $itemId)
+{
+ $sql = "SELECT price, discount FROM item WHERE itemId = :itemId";
+ $stmt = $db->prepare($sql);
+ $stmt->bindParam(':itemId', $itemId);
+ $stmt->execute();
+ $result = $stmt->fetch(PDO::FETCH_ASSOC);
+ return $result;
+}
 
 function getItemsImages($db)
 {
@@ -64,7 +83,6 @@ function searchForItems($db,$keyWord){
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
-
 // End homepage functions
 // Start Navbar
 function getBuyer($db,$username){
@@ -99,6 +117,15 @@ function getNotificationsForSeller($db,$ownerID){
   $stmt = $db->query($sql);
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   return $result;
+}
+
+function getBillByCartId($db)
+{
+ $sql = "SELECT * FROM bill WHERE cartId = 23";
+ $stmt = $db->prepare($sql);
+ $stmt->execute();
+ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ return $result;
 }
 // End Navbar
 // Signin functions
@@ -193,6 +220,21 @@ function insertCart($db)
     return $last_id;
 }
 
+function insertOrder($cartId, $orderPrice, $quantity, $buyerId, $itemId, $isShip, $db) {
+    $sql = "INSERT into orders (cartId,orderPrice, quantity, buyerId, itemId, isShip) values (:cartId,:orderPrice, :quantity, :buyerId, :itemId, :isShip)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':cartId', $cartId);
+    $stmt->bindParam(':orderPrice', $orderPrice);
+    $stmt->bindParam(':quantity', $quantity);
+    $stmt->bindParam(':buyerId', $buyerId);
+    $stmt->bindParam(':itemId', $itemId);
+    $stmt->bindParam(':isShip', $isShip);
+    $stmt->execute();
+    $last_id = $db->lastInsertId();
+    return $last_id;
+}
+
+   
 function insertBuyer($username, $password, $email, $fname, $lname, $db)
 {
     $cartID = insertCart($db);
@@ -245,6 +287,19 @@ function insertSellerPhoneNumber($id,$mobile,$db){
     return $last_id;
 }
 // Add Item
+function insertBill($numOfitems,$orderTotal,$cartid,$fn,$ln,$isShip,$cn,$address,$optional,$city,$country,$postcode,$email,$phone, $notes, $db){
+    $sql="INSERT INTO bill (numberOfItems, orderTotal, cartId, firstname, lastname, isShip, companyname, address, optional, city, country, postcode, email, phone, notes)
+    VALUES ('".$numOfitems."', '".$orderTotal."','".$cartid."', '".$fn."', '".$ln."', '".$isShip."', '".$cn."', '".$address."','".$optional."','".$city."', '".$country."','".$postcode."','".$email."','".$phone."','".$notes."')";
+    $stmt=$db->prepare($sql);
+    $stmt->execute();
+}
+
+function insertTest($cartid,$fn, $ln, $db){
+    $sql="INSERT INTO bill (cartId, firstname, lastname)
+    VALUES ('".$cartid."', '".$fn."', '".$ln."')";
+    $stmt=$db->prepare($sql);
+    $stmt->execute();
+    }
 
 function insertItem($title,$Des,$info,$price,$quantity,$childcatId,$discount,$sellerid,$homeNum,$street,$city,$country,$db){
     $sql="INSERT INTO item ( title, description, information , price, quantity, childcategoryId,sellerId,discount,homeNumber,street,city,country)
@@ -628,8 +683,16 @@ function countItemCart($db,$cartID){
     $result = $stmt->fetchColumn();
     return $result;
 }
+
 function getPayItemcount($db,$cartID){
     $sql="SELECT itemCount,payment from cart WHERE cart.cartId=".$cartID.";";
+    $stmt = $db->query($sql);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+function getNumberGameItems($db,$cartID){
+    $sql="SELECT itemId,quantity from cartitem WHERE cartitem.cartId=".$cartID.";";
     $stmt = $db->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -783,7 +846,7 @@ function deleteMobileBuyer($buyerId,$mobile,$db){
 }
 
 // Start order
-function makeAnOrder($db,$buyerId,$itemID,$orderPrice,$quantity){
+function makeAnOrder($db,$cartId,$buyerId,$itemID,$orderPrice,$quantity){
 
     // Check if the wanted quantity still available or not
     $sql5 = "SELECT item.quantity, item.sellerId, item.title from item WHERE item.itemId = $itemID";
@@ -805,9 +868,9 @@ function makeAnOrder($db,$buyerId,$itemID,$orderPrice,$quantity){
     $stmt2->execute(array(":cartId"=>$result[0]['cartId'],":itemId"=>$result[0]['itemId'] ));
     $stmt2->closeCursor();
 
-    $sql3 = "CALL insertNewOrder(:orderPrice,:quantity,:buyerId,:itemID)";
+    $sql3 = "CALL insertNewOrder(:cartId,:orderPrice,:quantity,:buyerId,:itemID)";
     $stmt3 = $db->prepare($sql3);
-    $stmt3->execute(array(":orderPrice"=>$orderPrice,":quantity"=>$quantity,":buyerId"=>$buyerId,":itemID"=>$itemID ));
+    $stmt3->execute(array(":cartId"=>$cartId,":orderPrice"=>$orderPrice,":quantity"=>$quantity,":buyerId"=>$buyerId,":itemID"=>$itemID ));
     $stmt3->closeCursor();
     
     $sql4 = "UPDATE item set item.quantity = item.quantity - :itemQTY WHERE itemId = :itemIDD;";

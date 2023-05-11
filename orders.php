@@ -87,6 +87,7 @@ else if (isset($_GET['acceptOrderId'])) {
 }
 else{
 ?>
+
     <div class="container">
         <h1 class="text-center m-5">Orders for <?=$itemName?></h1>
 
@@ -113,10 +114,18 @@ else{
                     <td> <?= $orderDetails[$i]->quantity ?> </td>
                     <td> <?= $orderDetails[$i]->orderDate ?> </td>
                     <td> <?= $buyer->userName ?> </td>
-                    <td>
-                        <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-success">Accept</a>
-                        <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-danger">Decline</a>
-                    </td>
+                    <?php if ($orderDetails[$i]->isShip): ?>
+                        <td>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-success">Accept</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-danger">Decline</a>
+                            <a href="details.php?itemid=<?=$_GET['itemid']?>" class="btn btn-primary">Details</a>
+                        </td>
+                    <?php else: ?>
+                        <td>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-success">Accept</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-danger">Decline</a>
+                        </td>
+                    <?php endif; ?>
                 </tr>
                 <?php
             }

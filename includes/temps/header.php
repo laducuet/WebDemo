@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="<?php echo $css?>front.css">
     <link rel="stylesheet" href="<?php echo $css?>frontend.css">
     <link rel="stylesheet" href="<?php echo $css?>bootstrap-icons.css">
+    <link rel="stylesheet" href="<?php echo $css?>checkout.css">
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<!-- Javascript -->	
 		<script type="text/javascript" src="js/jquery.min.js"></script>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 12:41 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 11, 2023 at 08:48 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,7 +61,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSellerWithUserName` (IN `UserNameee` VARCHAR(20))   SELECT * FROM seller where userName = UserNameee$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertNewOrder` (IN `OrderPricee` DOUBLE, IN `qty` INT(11), IN `buyerIdd` INT(11), IN `itemIdd` INT(11))   INSERT INTO orders (orderPrice,quantity,buyerId,itemId)  VALUES (OrderPricee,qty,buyerIdd,itemIdd)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertNewOrder` (IN `cartIdd` INT(11), IN `OrderPricee` DOUBLE, IN `qty` INT(11), IN `buyerIdd` INT(11), IN `itemIdd` INT(11))   INSERT INTO orders (cartId,orderPrice,quantity,buyerId,itemId)  VALUES (cartIdd,OrderPricee,qty,buyerIdd,itemIdd)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchForItemsByKeyword` (IN `KeyWord` VARCHAR(255))   SELECT * FROM item WHERE title LIKE KeyWord UNION SELECT * FROM item WHERE description LIKE KeyWord ORDER by quantity DESC$$
 
@@ -80,7 +80,7 @@ CREATE TABLE `admin` (
   `userName` varchar(20) NOT NULL,
   `email` varchar(70) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -91,6 +91,31 @@ INSERT INTO `admin` (`ID`, `fName`, `lName`, `userName`, `email`, `password`) VA
 (2, 'Zeyad', 'Tarek', 'ZeyadTarek', 'Zeyad.Ta01@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb'),
 (3, 'Abdelrahman', 'Mohamed', 'Abdelrahman', 'a.m.hamza156@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb'),
 (7, 'Ziad', 'Sherif', 'ZiadSherif', 'zsherif308@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill`
+--
+
+CREATE TABLE `bill` (
+  `ID` int(11) NOT NULL,
+  `numberOfItems` int(11) NOT NULL DEFAULT 0,
+  `orderTotal` int(11) NOT NULL DEFAULT 0,
+  `cartId` int(11) NOT NULL,
+  `firstname` varchar(300) DEFAULT NULL,
+  `lastname` varchar(300) DEFAULT NULL,
+  `isShip` tinyint(1) NOT NULL DEFAULT 0,
+  `companyname` varchar(300) DEFAULT NULL,
+  `address` varchar(300) DEFAULT NULL,
+  `optional` varchar(300) DEFAULT NULL,
+  `city` varchar(300) DEFAULT NULL,
+  `country` varchar(300) DEFAULT NULL,
+  `postcode` varchar(300) DEFAULT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `phone` varchar(12) DEFAULT NULL,
+  `notes` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -111,25 +136,14 @@ CREATE TABLE `buyer` (
   `disLikes` int(11) NOT NULL DEFAULT 0,
   `transactions` int(11) NOT NULL DEFAULT 0,
   `Amount` int(11) NOT NULL DEFAULT 100000
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `buyer`
 --
 
 INSERT INTO `buyer` (`ID`, `userName`, `password`, `joinDate`, `email`, `fName`, `lName`, `cartId`, `likes`, `disLikes`, `transactions`, `Amount`) VALUES
-(4, 'ahmed', '123456', '2022-01-06', 'ahmed@gmail.com', 'Ahmed', 'Mohamed', 4, 8, 2, 10, 100000),
-(5, 'Mohamed', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'mohamed@gmail.com', 'Mohamed', 'Ahmed', 5, 0, 0, 0, 100000),
-(6, 'Hossam', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Hossam@gmail.com', 'Hossam', 'Ahmed', 6, 0, 0, 0, 100000),
-(7, 'AyaAhmed', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Aya@gmail.com', 'Aya', 'Ahmed', 7, 7, 2, 8, 100000),
-(8, 'SarahAhmed', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Sarah@gmail.com', 'Sarah', 'Ahmed', 8, 0, 0, 0, 100000),
-(9, 'JohnDoe', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'john@gmail.com', 'John', 'Doe', 9, 0, 0, 0, 100000),
-(10, 'MohamedAhmed', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'mohamedahmed@gmail.com', 'Mohamed', 'Ahmed', 10, 0, 0, 0, 100000),
-(11, 'ZachariaIrvine', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Zacharia@gmail.com', 'Zacharia ', 'Irvine', 11, 0, 0, 0, 100000),
-(12, 'ArunMurillo', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'ArunMurillo@gmail.com', 'Arun', 'Murillo', 12, 0, 0, 0, 100000),
-(13, 'ReyanshEnriquez', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'ReyanshEnriquez@gmail.com', 'Reyansh', 'Enriquez', 13, 0, 0, 0, 100000),
-(14, 'EvelynRossi', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'EvelynRossi@gm.com', 'Evelyn', 'Rossi', 14, 0, 0, 0, 100000),
-(15, 'EmaanWilkerson', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'EmaanWilkerson@gm.com', 'Emaan', 'Wilkerson', 15, 0, 0, 0, 100000);
+(22, 'user', '123456', '2023-05-11', 's1mpleuet@gmail.com', 'NguyenTu', 'Trung', 22, 0, 1, 0, 100000);
 
 --
 -- Triggers `buyer`
@@ -149,29 +163,14 @@ CREATE TABLE `buyernotification` (
   `notificationId` int(11) NOT NULL,
   `sellerId` int(11) NOT NULL,
   `ownerID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `buyernotification`
 --
 
 INSERT INTO `buyernotification` (`notificationId`, `sellerId`, `ownerID`) VALUES
-(43, 4, 7),
-(44, 4, 7),
-(46, 4, 7),
-(47, 4, 7),
-(48, 4, 7),
-(49, 4, 7),
-(51, 4, 7),
-(53, 7, 7),
-(55, 4, 4),
-(61, 4, 4),
-(63, 4, 4),
-(65, 4, 4),
-(67, 4, 4),
-(70, 4, 4),
-(71, 4, 4),
-(73, 4, 4);
+(78, 4, 22);
 
 -- --------------------------------------------------------
 
@@ -183,25 +182,14 @@ CREATE TABLE `cart` (
   `cartId` int(11) NOT NULL,
   `itemCount` int(11) NOT NULL,
   `payment` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`cartId`, `itemCount`, `payment`) VALUES
-(4, 0, 0),
-(5, 0, 0),
-(6, 0, 0),
-(7, 7, 10825),
-(8, 0, 0),
-(9, 0, 0),
-(10, 0, 0),
-(11, 0, 0),
-(12, 0, 0),
-(13, 0, 0),
-(14, 0, 0),
-(15, 0, 0);
+(22, 7, 2250);
 
 -- --------------------------------------------------------
 
@@ -213,7 +201,7 @@ CREATE TABLE `cartitem` (
   `cartId` int(11) NOT NULL,
   `itemId` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -225,7 +213,7 @@ CREATE TABLE `category` (
   `categoryId` int(11) NOT NULL,
   `categoryName` varchar(30) NOT NULL,
   `categoryDescription` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -262,7 +250,7 @@ CREATE TABLE `childcategory` (
   `categoryId` int(11) DEFAULT 1,
   `childcategoryDescription` varchar(300) NOT NULL,
   `totalItems` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `childcategory`
@@ -272,7 +260,7 @@ INSERT INTO `childcategory` (`childcategoryId`, `childcategoryName`, `categoryId
 (11, 'ACC THƯỜNG', 10, 'accthuong', 0),
 (12, 'ACC RANDOM', 10, 'accrandom', 0),
 (13, 'ACC VIP', 10, 'accvip', 123),
-(14, 'HP', 11, 'hp', 0),
+(14, 'HP', 11, 'hp', 24),
 (15, 'DELL', 11, 'dell', 0),
 (16, 'ACER', 11, 'acer', 0),
 (17, 'ASUS', 11, 'asus', 0),
@@ -309,6 +297,7 @@ CREATE TABLE `item` (
   `itemId` int(11) NOT NULL,
   `title` varchar(20) NOT NULL,
   `description` varchar(300) NOT NULL,
+  `information` text DEFAULT NULL,
   `price` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `addDate` date NOT NULL DEFAULT curdate(),
@@ -323,15 +312,16 @@ CREATE TABLE `item` (
   `street` varchar(50) NOT NULL,
   `city` varchar(30) NOT NULL,
   `country` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`itemId`, `title`, `description`, `price`, `quantity`, `addDate`, `isDeleted`, `isSaled`, `childcategoryId`, `sellerId`, `startDate`, `endDate`, `discount`, `homeNumber`, `street`, `city`, `country`) VALUES
-(51, 'MS1', 'aaaaa', 60, 3, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 12, 12, 'HN', 'HN', 'VN'),
-(52, 'MS2', 'aaaa', 100, 111, '2023-05-10', 0, 0, 13, 4, NULL, NULL, 11, 111, 'HN', 'HN', 'Vietnam');
+INSERT INTO `item` (`itemId`, `title`, `description`, `information`, `price`, `quantity`, `addDate`, `isDeleted`, `isSaled`, `childcategoryId`, `sellerId`, `startDate`, `endDate`, `discount`, `homeNumber`, `street`, `city`, `country`) VALUES
+(51, 'MS1', 'aaaaa', NULL, 60, 0, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 12, 12, 'HN', 'HN', 'VN'),
+(52, 'MS2', 'aaaa', NULL, 100, 95, '2023-05-10', 0, 0, 13, 4, NULL, NULL, 11, 111, 'HN', 'HN', 'Vietnam'),
+(54, 'MS1', 'LapTop', NULL, 200, 13, '2023-05-11', 0, 0, 14, 4, NULL, NULL, 10, 12, 'HN', 'HN', 'VN');
 
 -- --------------------------------------------------------
 
@@ -342,7 +332,7 @@ INSERT INTO `item` (`itemId`, `title`, `description`, `price`, `quantity`, `addD
 CREATE TABLE `itemimage` (
   `itemId` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `itemimage`
@@ -350,7 +340,8 @@ CREATE TABLE `itemimage` (
 
 INSERT INTO `itemimage` (`itemId`, `image`) VALUES
 (51, '645a8e7d2bbc1-1683656317.jpg'),
-(52, '645b6bfd3911c-1683713021.jpg');
+(52, '645b6bfd3911c-1683713021.jpg'),
+(54, '645c7c1e9e0cd-1683782686.jpg');
 
 -- --------------------------------------------------------
 
@@ -361,7 +352,7 @@ INSERT INTO `itemimage` (`itemId`, `image`) VALUES
 CREATE TABLE `mobileadmin` (
   `adminId` int(11) NOT NULL,
   `phone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mobileadmin`
@@ -382,28 +373,14 @@ INSERT INTO `mobileadmin` (`adminId`, `phone`) VALUES
 CREATE TABLE `mobilebuyer` (
   `buyerId` int(11) NOT NULL,
   `phone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mobilebuyer`
 --
 
 INSERT INTO `mobilebuyer` (`buyerId`, `phone`) VALUES
-(4, '1234567689'),
-(5, '123456789'),
-(6, '12345678'),
-(7, '123456789'),
-(7, '123789456'),
-(7, '951357486'),
-(7, '987654321'),
-(8, '123456789'),
-(9, '123456789'),
-(10, '123456789'),
-(11, '123456789'),
-(12, '123456789'),
-(13, '123456789'),
-(14, '123456789'),
-(15, '1234567890');
+(22, '0123456789');
 
 -- --------------------------------------------------------
 
@@ -414,7 +391,7 @@ INSERT INTO `mobilebuyer` (`buyerId`, `phone`) VALUES
 CREATE TABLE `mobileseller` (
   `sellerId` int(11) NOT NULL,
   `phoneNo` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mobileseller`
@@ -449,7 +426,7 @@ CREATE TABLE `notification` (
   `message` varchar(300) NOT NULL,
   `date` date NOT NULL DEFAULT curdate(),
   `seen` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `notification`
@@ -502,7 +479,12 @@ INSERT INTO `notification` (`id`, `message`, `date`, `seen`) VALUES
 (70, 'Hello ahmed regarding your order for MS1, quantity: 4, price: 211.2 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-10', 1),
 (71, 'Hello ahmed regarding your order for MS1, quantity: 2, price: 105.6 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
 (72, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 1, Price: 52.8, at 2023-05-10', '2023-05-10', 1),
-(73, 'Hello ahmed regarding your order for MS1, quantity: 1, price: 52.8 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1);
+(73, 'Hello ahmed regarding your order for MS1, quantity: 1, price: 52.8 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
+(74, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 0),
+(75, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS1, Quantity: 3, Price: 158.4, at 2023-05-11', '2023-05-11', 1),
+(76, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 1),
+(77, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 10, Price: 890, at 2023-05-11', '2023-05-11', 1),
+(78, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0);
 
 -- --------------------------------------------------------
 
@@ -512,40 +494,26 @@ INSERT INTO `notification` (`id`, `message`, `date`, `seen`) VALUES
 
 CREATE TABLE `orders` (
   `orderId` int(11) NOT NULL,
+  `cartId` int(11) NOT NULL DEFAULT 0,
   `orderPrice` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `orderDate` date NOT NULL DEFAULT curdate(),
   `buyerId` int(11) NOT NULL,
   `itemId` int(11) DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` int(1) NOT NULL DEFAULT 0,
+  `isShip` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`orderId`, `orderPrice`, `quantity`, `orderDate`, `buyerId`, `itemId`, `status`) VALUES
-(18, 582, 10, '2022-01-06', 7, NULL, 1),
-(19, 475, 10, '2022-01-06', 7, NULL, 0),
-(20, 1950, 15, '2022-01-06', 7, NULL, 2),
-(22, 11200, 20, '2022-01-06', 7, NULL, 2),
-(23, 17000, 20, '2022-01-06', 7, NULL, 1),
-(24, 6000, 10, '2022-01-06', 7, NULL, 1),
-(26, 4250, 5, '2022-01-06', 7, NULL, 1),
-(27, 2700, 10, '2022-01-06', 7, NULL, 1),
-(28, 232.8, 4, '2022-01-08', 7, NULL, 1),
-(29, 600, 1, '2022-01-08', 4, NULL, 1),
-(30, 8500, 10, '2022-01-08', 4, NULL, 0),
-(31, 190, 5, '2022-01-08', 7, NULL, 0),
-(32, 220, 5, '2022-01-08', 7, NULL, 0),
-(33, 240, 8, '2022-01-08', 7, NULL, 0),
-(34, 135, 3, '2023-05-07', 4, NULL, 1),
-(35, 1680, 12, '2023-05-09', 4, NULL, 1),
-(36, 211.2, 4, '2023-05-10', 4, 51, 1),
-(37, 105.6, 2, '2023-05-10', 4, 51, 1),
-(38, 105.6, 2, '2023-05-10', 4, 51, 1),
-(39, 211.2, 4, '2023-05-10', 4, 51, 2),
-(40, 52.8, 1, '2023-05-10', 4, 51, 1);
+INSERT INTO `orders` (`orderId`, `cartId`, `orderPrice`, `quantity`, `orderDate`, `buyerId`, `itemId`, `status`, `isShip`) VALUES
+(42, 0, 158.4, 3, '2023-05-11', 22, 51, 0, 0),
+(43, 0, 267, 3, '2023-05-11', 22, 52, 0, 0),
+(44, 0, 890, 10, '2023-05-11', 22, 52, 0, 0),
+(46, 0, 180, 1, '2023-05-11', 22, 54, 2, 0),
+(47, 0, 180, 1, '2023-05-11', 22, 54, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -565,7 +533,7 @@ CREATE TABLE `seller` (
   `disLikes` int(11) NOT NULL DEFAULT 0,
   `transactions` int(11) NOT NULL DEFAULT 0,
   `Amount` int(11) NOT NULL DEFAULT 100000
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `seller`
@@ -603,44 +571,16 @@ CREATE TABLE `sellernotifications` (
   `notificationId` int(11) NOT NULL,
   `buyerId` int(11) NOT NULL,
   `ownerID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sellernotifications`
 --
 
 INSERT INTO `sellernotifications` (`notificationId`, `buyerId`, `ownerID`) VALUES
-(19, 4, 7),
-(20, 4, 7),
-(21, 4, 7),
-(22, 4, 7),
-(23, 4, 7),
-(25, 4, 7),
-(26, 4, 7),
-(28, 4, 7),
-(30, 7, 7),
-(31, 7, 7),
-(32, 7, 7),
-(34, 4, 7),
-(37, 7, 4),
-(38, 7, 4),
-(39, 7, 4),
-(40, 4, 4),
-(45, 7, 4),
-(50, 7, 4),
-(52, 7, 7),
-(54, 4, 4),
-(56, 4, 4),
-(57, 7, 7),
-(58, 7, 4),
-(59, 7, 7),
-(60, 4, 4),
-(62, 4, 4),
-(64, 4, 4),
-(66, 4, 4),
-(68, 4, 4),
-(69, 4, 4),
-(72, 4, 4);
+(75, 22, 4),
+(76, 22, 4),
+(77, 22, 4);
 
 --
 -- Indexes for dumped tables
@@ -653,6 +593,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `userName` (`userName`) USING BTREE,
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `buyer`
@@ -770,16 +716,22 @@ ALTER TABLE `admin`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -797,19 +749,19 @@ ALTER TABLE `childcategory`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `seller`

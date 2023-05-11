@@ -16,7 +16,7 @@ if (isset($_GET['deleteItem'])) {
 
 if(isset($_GET['orderPrice'])&&isset($_GET['qty'])&&isset($_GET['userID'])&&isset($_GET['itemID'])){
     $_SESSION['orderStatus'] = -1; 
-    $_SESSION['orderStatus'] = makeAnOrder($db,$_GET['userID'],$_GET['itemID'],$_GET['orderPrice'],$_GET['qty']);
+    $_SESSION['orderStatus'] = makeAnOrder($db,$cartID, $_GET['userID'],$_GET['itemID'],$_GET['orderPrice'],$_GET['qty']);
     if($_SESSION['orderStatus'] === -1)
       header("Location: cart.php?Ordersuccess=true");
     else 
@@ -62,7 +62,7 @@ if(isset($_GET['Ordersuccess'])&&$_GET['Ordersuccess']==='false'){
         <div class="card m-md-auto shadow" style="width: 19rem;">
           <a href="cart.php?deleteItem=<?php echo $k['itemId']?>&finalPrice=<?php echo $finalPrice; ?>"
             id="stopRedirect" class="btn btn-danger rounded-pill position-absolute"
-            style="width: fit-content; top: 0;right: 0" onclick="return        deleteItemCart()">
+            style="width: fit-content; top: 0;right: 0" onclick="return deleteItemCart()">
             <span class="badge"><i class="bi bi-trash"></i>
             </span></a>
           <?php $imageOfitem=GetImagesByID($k['itemId'],$db); ?>
@@ -82,8 +82,13 @@ if(isset($_GET['Ordersuccess'])&&$_GET['Ordersuccess']==='false'){
             <div class="card-body">
               <a href="reviewItem.php?do=Manage&itemId=<?php echo $k['itemId']; ?>&itemName=<?php echo $k['title']; ?>"
                 class="btn btn-warning ">Edit quantity</a>
-              <a href="cart.php?itemID=<?php echo $k['itemId']?>&userID=<?php echo $_SESSION['id']?>&orderPrice=<?php echo $finalPrice?>&qty=<?php echo $k['quantity']?>"
-                class="btn btn-primary">Order Item</a>
+                <?php if (getCategoryNameById($db, $k['itemId']) == "GAME"): ?>
+                  <a href="cart.php?itemID=<?php echo $k['itemId']?>&userID=<?php echo $_SESSION['id']?>&orderPrice=<?php echo $finalPrice?>&qty=<?php echo $k['quantity']?>"
+                  class="btn btn-primary">PayNow</a>
+                <?php else: ?>
+                  <a href="checkout.php"
+                    class="btn btn-primary">Order Item</a>
+                <?php endif; ?>
             </div>
           </div>
         </div>
@@ -91,11 +96,9 @@ if(isset($_GET['Ordersuccess'])&&$_GET['Ordersuccess']==='false'){
       <?php endforeach ?>
     </div>
   </div>
-  <?php $result=getPayItemcount($db,$cartID)[0];?>
   <div class="container">
-    <!-- <a href="#"class="btn btn-success mb-2 mt-5 ">Order all items</a> -->
-    <h6 class="mt-3 display text-center text-dark"><?php echo 'Total Number Of Items: ' .$result['itemCount'] ?></h6>
-    <h6 class="display text-center text-dark"><?php echo 'Total Payment: ' .$result['payment'] .' $' ?></h6>
+    <h6 class="mt-3 display text-center text-dark"></h6>
+    <h6 class="display text-center text-dark"></h6>
   </div>
 </div>
 
