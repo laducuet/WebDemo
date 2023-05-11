@@ -116,14 +116,14 @@ else{
                     <td> <?= $buyer->userName ?> </td>
                     <?php if ($orderDetails[$i]->isShip): ?>
                         <td>
-                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-success">Accept</a>
-                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-danger">Decline</a>
-                            <a href="details.php?itemid=<?=$_GET['itemid']?>" class="btn btn-primary">Details</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>&billId=<?=$orderDetails[$i]->billId?>" class="btn btn-success">Accept</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>&billId=<?=$orderDetails[$i]->billId?>" class="btn btn-danger">Decline</a>
+                            <a href="details.php?itemid=<?=$_GET['itemid']?>&buyerId=<?=$orderDetails[$i]->buyerId?>&billId=<?=$orderDetails[$i]->billId?>" class="btn btn-primary">Details</a>
                         </td>
                     <?php else: ?>
                         <td>
-                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-success">Accept</a>
-                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>" class="btn btn-danger">Decline</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&acceptOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>&billId=<?=$orderDetails[$i]->billId?>" class="btn btn-success">Accept</a>
+                            <a href="orders.php?itemid=<?=$_GET['itemid']?>&deleteOrderId=<?=$orderDetails[$i]->orderId?>&buyerUserName=<?=$buyer->userName?>&price=<?=$orderDetails[$i]->orderPrice?>&quantity=<?=$orderDetails[$i]->quantity?>&orderDate=<?= $orderDetails[$i]->orderDate ?>&buyerId=<?=$orderDetails[$i]->buyerId?>&billId=<?=$orderDetails[$i]->billId?>" class="btn btn-danger">Decline</a>
                         </td>
                     <?php endif; ?>
                 </tr>

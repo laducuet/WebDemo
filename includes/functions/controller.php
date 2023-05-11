@@ -119,14 +119,32 @@ function getNotificationsForSeller($db,$ownerID){
   return $result;
 }
 
-function getBillByCartId($db)
+function getBill($db, $cartID, $billId)
 {
- $sql = "SELECT * FROM bill WHERE cartId = 23";
+ $sql = "SELECT * FROM bill WHERE cartId = :cartID AND ID = :billId" ;
  $stmt = $db->prepare($sql);
+ $stmt->bindParam(':cartID', $cartID);
+ $stmt->bindParam(':billId', $billId);
  $stmt->execute();
  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
  return $result;
 }
+
+function getMaxBillId($db) {
+    // Chuẩn bị câu lệnh SQL
+    $sql = "SELECT MAX(billId) as maxBillId FROM orders";
+    
+    // Chuẩn bị và thực thi truy vấn SQL
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    
+    // Lấy kết quả trả về
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    // Trả về giá trị lớn nhất của trường billId
+    return $result['maxBillId'];
+}
+
 // End Navbar
 // Signin functions
 function getBuyerPassword_ID($username, $db)
@@ -220,8 +238,8 @@ function insertCart($db)
     return $last_id;
 }
 
-function insertOrder($cartId, $orderPrice, $quantity, $buyerId, $itemId, $isShip, $db) {
-    $sql = "INSERT into orders (cartId,orderPrice, quantity, buyerId, itemId, isShip) values (:cartId,:orderPrice, :quantity, :buyerId, :itemId, :isShip)";
+function insertOrder($cartId, $orderPrice, $quantity, $buyerId, $itemId, $isShip, $billId, $db) {
+    $sql = "INSERT into orders (cartId,orderPrice, quantity, buyerId, itemId, isShip, billId) values (:cartId,:orderPrice, :quantity, :buyerId, :itemId, :isShip, :billId)";
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':cartId', $cartId);
     $stmt->bindParam(':orderPrice', $orderPrice);
@@ -229,6 +247,7 @@ function insertOrder($cartId, $orderPrice, $quantity, $buyerId, $itemId, $isShip
     $stmt->bindParam(':buyerId', $buyerId);
     $stmt->bindParam(':itemId', $itemId);
     $stmt->bindParam(':isShip', $isShip);
+    $stmt->bindParam(':billId', $billId);
     $stmt->execute();
     $last_id = $db->lastInsertId();
     return $last_id;
@@ -707,10 +726,12 @@ function GetItemByID($id, $db) {
     return $result;
 }
 function GetCartIDFromBuyer($id, $db) {
-    $sql = "SELECT cartId  FROM buyer WHERE ID=" . $id . ";";
-    $stmt = $db->query($sql);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+ $sql = "SELECT cartId FROM buyer WHERE ID=:id";
+ $stmt = $db->prepare($sql);
+ $stmt->bindParam(':id', $id);
+ $stmt->execute();
+ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ return $result;
 }
 function UpdateItemCount($id, $price, $db) {
     $updateSql = "UPDATE cart SET itemCount=itemCount+1, payment=payment+" . $price . " WHERE cart.cartId=" . $id . ";";

@@ -2,8 +2,8 @@
   ob_start();
   $pageTitle = 'Checkout Page';
   require "init.php";
-  $cartID = GetCartIDFromBuyer($_SESSION["id"], $db)['cartId'];
-  $billByCartId = getBillByCartId($db, $cartID);
+  $cartID = GetCartIDFromBuyer($_GET['buyerId'], $db)[0]['cartId'];
+  $bill = getBill($db, $cartID, $_GET['billId']);
   $itemName = GetItemByID($_GET['itemid'], $db)[0]['title'];
 ?>
 
@@ -19,60 +19,60 @@
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>First Name <span class="required">*</span></label>
-                                            <input type="text" placeholder="" name="firstname" value="<?php echo $billByCartId[0]['firstname'] ?>">
+                                            <input type="text" placeholder="" name="firstname" value="<?php echo $bill[0]['firstname'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Last Name <span class="required">*</span></label>
-                                            <input type="text" placeholder="" name="lastname" value="<?php echo $billByCartId[0]['lastname'] ?>">
+                                            <input type="text" placeholder="" name="lastname" value="<?php echo $bill[0]['lastname'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Company Name</label>
-                                            <input type="text" placeholder="" name="companyname" value="<?php echo $billByCartId[0]['companyname'] ?>">
+                                            <input type="text" placeholder="" name="companyname" value="<?php echo $bill[0]['companyname'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Address <span class="required">*</span></label>
-                                            <input type="text" placeholder="Street address" name="address" value="<?php echo $billByCartId[0]['address'] ?>">
+                                            <input type="text" placeholder="Street address" name="address" value="<?php echo $bill[0]['address'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
-                                            <input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="optional" value="<?php echo $billByCartId[0]['optional'] ?>">
+                                            <input type="text" placeholder="Apartment, suite, unit etc. (optional)" name="optional" value="<?php echo $bill[0]['optional'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Town / City <span class="required">*</span></label>
-                                            <input type="text" placeholder="Town / City"  name="city" value="<?php echo $billByCartId[0]['city'] ?>">
+                                            <input type="text" placeholder="Town / City"  name="city" value="<?php echo $bill[0]['city'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>State / County <span class="required">*</span></label>
-                                            <input type="text" placeholder="" name="country" value="<?php echo $billByCartId[0]['country'] ?>">
+                                            <input type="text" placeholder="" name="country" value="<?php echo $bill[0]['country'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Postcode / Zip <span class="required">*</span></label>
-                                            <input type="text" placeholder="Postcode / Zip"  name="postcode" value="<?php echo $billByCartId[0]['postcode'] ?>">
+                                            <input type="text" placeholder="Postcode / Zip"  name="postcode" value="<?php echo $bill[0]['postcode'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Email Address <span class="required">*</span></label>
-                                            <input type="email" placeholder="" name="email" value="<?php echo $billByCartId[0]['email'] ?>">
+                                            <input type="email" placeholder="" name="email" value="<?php echo $bill[0]['email'] ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Phone <span class="required">*</span></label>
-                                            <input type="text" placeholder="Postcode / Zip" name="phone" value="<?php echo $billByCartId[0]['phone'] ?>">
+                                            <input type="text" placeholder="Postcode / Zip" name="phone" value="<?php echo $bill[0]['phone'] ?>">
                                         </div>
                                     </div>
 
@@ -81,7 +81,7 @@
                                     <div class="order-notes">
                                         <div class="checkout-form-list">
                                             <label>Order Notes</label>
-                                            <textarea id="checkout-mess"  name="notes" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." value="<?php echo $billByCartId[0]['notes'] ?>"></textarea>
+                                            <textarea id="checkout-mess"  name="notes" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." value="<?php echo $bill[0]['notes'] ?>"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                                 <th>Payment Method</th>
                                                 <td>
                                                     <ul>
-                                                        <?php if($billByCartId[0]['isShip'] == 0): ?>
+                                                        <?php if($bill[0]['isShip'] == 0): ?>
                                                         <li>
                                                             <label>
                                                                 Pay Now: <span class="amount">$</span>

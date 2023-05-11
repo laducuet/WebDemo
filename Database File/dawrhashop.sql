@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 08:48 AM
+-- Generation Time: May 11, 2023 at 09:45 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -117,6 +117,15 @@ CREATE TABLE `bill` (
   `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`ID`, `numberOfItems`, `orderTotal`, `cartId`, `firstname`, `lastname`, `isShip`, `companyname`, `address`, `optional`, `city`, `country`, `postcode`, `email`, `phone`, `notes`) VALUES
+(1, 0, 360, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'Nguyen Khanh Toan', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 'trungcnttvnu@gmail.com', '+84355287940', 'aa'),
+(2, 0, 572, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'CoNhue', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 's1mpleuet@gmail.com', '123456789', ''),
+(3, 0, 392, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'Nguyen Khanh Toan', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 'trungcnttvnu@gmail.com', '+84355287940', 'aa');
+
 -- --------------------------------------------------------
 
 --
@@ -143,7 +152,7 @@ CREATE TABLE `buyer` (
 --
 
 INSERT INTO `buyer` (`ID`, `userName`, `password`, `joinDate`, `email`, `fName`, `lName`, `cartId`, `likes`, `disLikes`, `transactions`, `Amount`) VALUES
-(22, 'user', '123456', '2023-05-11', 's1mpleuet@gmail.com', 'NguyenTu', 'Trung', 22, 0, 1, 0, 100000);
+(4, 'user', '123456', '2023-05-11', 'trungcnttvnu@gmail.com', 'Trung', 'NguyenTu', 23, 3, 2, 5, 98837);
 
 --
 -- Triggers `buyer`
@@ -170,7 +179,13 @@ CREATE TABLE `buyernotification` (
 --
 
 INSERT INTO `buyernotification` (`notificationId`, `sellerId`, `ownerID`) VALUES
-(78, 4, 22);
+(80, 4, 4),
+(81, 4, 4),
+(82, 4, 4),
+(83, 4, 4),
+(85, 4, 4),
+(86, 4, 4),
+(87, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -189,7 +204,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cartId`, `itemCount`, `payment`) VALUES
-(22, 7, 2250);
+(23, 14, 3534.16);
 
 -- --------------------------------------------------------
 
@@ -261,7 +276,7 @@ INSERT INTO `childcategory` (`childcategoryId`, `childcategoryName`, `categoryId
 (12, 'ACC RANDOM', 10, 'accrandom', 0),
 (13, 'ACC VIP', 10, 'accvip', 123),
 (14, 'HP', 11, 'hp', 24),
-(15, 'DELL', 11, 'dell', 0),
+(15, 'DELL', 11, 'dell', 120),
 (16, 'ACER', 11, 'acer', 0),
 (17, 'ASUS', 11, 'asus', 0),
 (18, 'APPLE', 11, 'apple', 0),
@@ -320,8 +335,9 @@ CREATE TABLE `item` (
 
 INSERT INTO `item` (`itemId`, `title`, `description`, `information`, `price`, `quantity`, `addDate`, `isDeleted`, `isSaled`, `childcategoryId`, `sellerId`, `startDate`, `endDate`, `discount`, `homeNumber`, `street`, `city`, `country`) VALUES
 (51, 'MS1', 'aaaaa', NULL, 60, 0, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 12, 12, 'HN', 'HN', 'VN'),
-(52, 'MS2', 'aaaa', NULL, 100, 95, '2023-05-10', 0, 0, 13, 4, NULL, NULL, 11, 111, 'HN', 'HN', 'Vietnam'),
-(54, 'MS1', 'LapTop', NULL, 200, 13, '2023-05-11', 0, 0, 14, 4, NULL, NULL, 10, 12, 'HN', 'HN', 'VN');
+(52, 'MS2', 'aaaa', NULL, 100, 89, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 11, 111, 'HN', 'HN', 'Vietnam'),
+(54, 'MS1', 'LapTop', NULL, 200, 15, '2023-05-11', 0, 1, 14, 4, NULL, NULL, 10, 12, 'HN', 'HN', 'VN'),
+(55, 'aa', 'aaa', '', 12, 120, '2023-05-12', 0, 0, 15, 4, NULL, NULL, 12, 1, 'HN', 'HN', 'Vietnam');
 
 -- --------------------------------------------------------
 
@@ -341,7 +357,8 @@ CREATE TABLE `itemimage` (
 INSERT INTO `itemimage` (`itemId`, `image`) VALUES
 (51, '645a8e7d2bbc1-1683656317.jpg'),
 (52, '645b6bfd3911c-1683713021.jpg'),
-(54, '645c7c1e9e0cd-1683782686.jpg');
+(54, '645c7c1e9e0cd-1683782686.jpg'),
+(55, '645d407cab13f-1683832956.jpg');
 
 -- --------------------------------------------------------
 
@@ -380,7 +397,7 @@ CREATE TABLE `mobilebuyer` (
 --
 
 INSERT INTO `mobilebuyer` (`buyerId`, `phone`) VALUES
-(22, '0123456789');
+(4, '0355287940');
 
 -- --------------------------------------------------------
 
@@ -484,7 +501,17 @@ INSERT INTO `notification` (`id`, `message`, `date`, `seen`) VALUES
 (75, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS1, Quantity: 3, Price: 158.4, at 2023-05-11', '2023-05-11', 1),
 (76, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 1),
 (77, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 10, Price: 890, at 2023-05-11', '2023-05-11', 1),
-(78, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0);
+(78, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(79, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 1, Price: 89, at 2023-05-11', '2023-05-11', 1),
+(80, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(81, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(82, 'Hello user regarding your order for MS1, quantity: 2, price: 360 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(83, 'Hello user regarding your order for MS2, quantity: 1, price: 89 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(84, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 1),
+(85, 'Hello user regarding your order for MS2, quantity: 3, price: 267 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(86, 'Hello user regarding your order for MS2, quantity: 3, price: 267 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(87, 'Hello user regarding your order for MS1, quantity: 3, price: 540 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
+(88, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 2, Price: 178, at 2023-05-11', '2023-05-12', 0);
 
 -- --------------------------------------------------------
 
@@ -501,19 +528,21 @@ CREATE TABLE `orders` (
   `buyerId` int(11) NOT NULL,
   `itemId` int(11) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT 0,
-  `isShip` tinyint(1) NOT NULL DEFAULT 0
+  `isShip` tinyint(1) NOT NULL DEFAULT 0,
+  `billId` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`orderId`, `cartId`, `orderPrice`, `quantity`, `orderDate`, `buyerId`, `itemId`, `status`, `isShip`) VALUES
-(42, 0, 158.4, 3, '2023-05-11', 22, 51, 0, 0),
-(43, 0, 267, 3, '2023-05-11', 22, 52, 0, 0),
-(44, 0, 890, 10, '2023-05-11', 22, 52, 0, 0),
-(46, 0, 180, 1, '2023-05-11', 22, 54, 2, 0),
-(47, 0, 180, 1, '2023-05-11', 22, 54, 0, 1);
+INSERT INTO `orders` (`orderId`, `cartId`, `orderPrice`, `quantity`, `orderDate`, `buyerId`, `itemId`, `status`, `isShip`, `billId`) VALUES
+(1, 23, 360, 2, '2023-05-12', 4, 54, 0, 1, 1),
+(2, 23, 31.68, 3, '2023-05-12', 4, 54, 0, 1, 2),
+(3, 23, 31.68, 3, '2023-05-12', 4, 55, 0, 1, 2),
+(4, 23, 178, 2, '2023-05-12', 4, 52, 0, 0, 0),
+(5, 23, 21.12, 2, '2023-05-12', 4, 54, 0, 1, 3),
+(6, 23, 31.68, 3, '2023-05-12', 4, 55, 0, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -540,7 +569,7 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`ID`, `userName`, `password`, `joinDate`, `email`, `fName`, `lName`, `likes`, `disLikes`, `transactions`, `Amount`) VALUES
-(4, 'AhmedElsaid', '123456', '2022-01-06', 'Ahmed2@gmail.com', 'Ahmed', 'Elsaid', 2, 1, 14, 100000),
+(4, 'AhmedElsaid', '123456', '2022-01-06', 'Ahmed2@gmail.com', 'Ahmed', 'Elsaid', 2, 1, 19, 101163),
 (5, 'Liam', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Liam@gmail.com', 'Liam', 'Noah', 0, 0, 0, 100000),
 (6, 'Olivia', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Olivia@gmail.com', 'Olivia', 'Liam', 0, 0, 0, 100000),
 (7, 'Emma', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Emma@gmail.com', 'Emma', 'Oliver', 4, 3, 4, 100000),
@@ -578,9 +607,9 @@ CREATE TABLE `sellernotifications` (
 --
 
 INSERT INTO `sellernotifications` (`notificationId`, `buyerId`, `ownerID`) VALUES
-(75, 22, 4),
-(76, 22, 4),
-(77, 22, 4);
+(79, 4, 4),
+(84, 4, 4),
+(88, 4, 4);
 
 --
 -- Indexes for dumped tables
@@ -719,19 +748,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -749,19 +778,19 @@ ALTER TABLE `childcategory`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `seller`

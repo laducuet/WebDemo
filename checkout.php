@@ -2,6 +2,7 @@
   ob_start();
   $pageTitle = 'Checkout Page';
   require "init.php";
+  $maxbillId = getMaxBillId($db) + 1; 
   $cartID = GetCartIDFromBuyer($_SESSION["id"], $db)[0]['cartId'];
   $itemCount = 0;
   $result = 0;
@@ -93,7 +94,7 @@
         $cateName = getCategoryNameById($db, $cartitemgame[$i]['itemId']);
         if ($cateName != "GAME") {
             $orderPrice = $cartitemgame[$i]['quantity'] * $price['price'] * (1 - $price['discount']/100);
-            insertOrder($cartID, $orderPrice, $cartitemgame[$i]['quantity'], $_SESSION["id"], $cartitemgame[$i]['itemId'], $_SESSION["isShip"],  $db);
+            insertOrder($cartID, $orderPrice, $cartitemgame[$i]['quantity'], $_SESSION["id"], $cartitemgame[$i]['itemId'], $_SESSION["isShip"], $maxbillId, $db);
             deleteItemCart($cartID, $cartitemgame[$i]['itemId'], $db);
         }
       }      
