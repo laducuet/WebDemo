@@ -63,8 +63,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 ?>
     <div class="container-fluid text-center shadow p-2">
         <a href="index.php" class="navbar-brand"  style="text-decoration: none;color: black">
-            <img src="<?= $images."Logo2.png" ?>" width="50" height="50" alt="logo">
-            Dawrha
+        <img src="img/icons/online_shopping.png" width="50" height="50" alt="logo" >
+            Team 9
         </a>
     </div>
     <div class="row justify-content-evenly container-fluid">
@@ -72,7 +72,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             <div class="col-lg-5 col-md-12">
                 <form method="POST" action="signin.php" class="form-signin p-5">
                     <h3 class="m-3">Sign in to your account</h3>
-                    <p class="lead m-3">Dawrha </p>
+                    <p class="lead m-3">Team 9 </p>
                     <div class="input-group mb-4">
                         <input type="text" required id="username" class="form-control" placeholder="Username"
                                name="username"

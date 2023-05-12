@@ -99,8 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
     <div class="container-fluid text-center shadow p-2">
         <a href="index.php" class="navbar-brand"  style="text-decoration: none;color: black">
-                <img src="<?= $images."Logo2.png" ?>" width="50" height="50" alt="logo">
-                Dawrha
+        <img src="img/icons/online_shopping.png" width="50" height="50" alt="logo" >
+                Team 9
             </a>
     </div>
     <div class="row justify-content-evenly container-fluid">
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col-lg-5 col-md-12 ">
                 <form method="POST" action="signup.php" class="form-signin p-5">
                     <h3 class="m-3">Create your account</h3>
-                    <p class="lead m-3">Dawrha </p>
+                    <p class="lead m-3">Team 9 </p>
                     <div class="input-group mb-4">
                         <span class="input-group-text">@</span>
                         <input type="email" required id="email" class="form-control" placeholder="Email Address" name="email"

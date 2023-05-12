@@ -125,7 +125,7 @@ header("Location: signin.php");
 				</div> <!-- logo -->
         <div class="menu-bar">
 				<div class="search-bar">
-					<form>
+					<form action="searchItem.php" method="GET">
 						<div class="form-group">
 							 <input type="text" class="form-control" name="keyword" placeholder="Search">
 							<img src="img/icons/search.png">
