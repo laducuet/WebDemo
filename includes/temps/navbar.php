@@ -47,8 +47,8 @@ header("Location: signin.php");
 					<a href="index.php">
 						<img src="img/icons/online_shopping.png">
 						<div class="logo-text">
-							<p class="big-logo">Ecommerce</p>
-							<p class="small-logo">online shop</p>
+							<p class="big-logo">Software Engineering</p>
+							<p class="small-logo">Team 9</p>
 						</div>
 					</a>
 				</div> <!-- logo -->
@@ -75,8 +75,13 @@ header("Location: signin.php");
 						
 					</div>
           <div class="dropdown">
-						<img src="img/icons/heart.png">
+          <?php if($unSeenFlag): ?>
+            <img src="img/icons/heart_fill.png">
+            <?php else: ?>
+              <img src="img/icons/heart.png">
+            <?php endif; ?>
 						<ul class="dropdown-menu dropdown-menu-notification" aria-labelledby="navbarDropdown11" style="right: 0;">
+           
       <?php foreach($Notifications as $noti): ?>
       <?php if($noti['seen']===0): ?>
       <?php $_SESSION['noOfNewNotification'] = $_SESSION['noOfNewNotification'] +1; ?>
@@ -112,26 +117,36 @@ header("Location: signin.php");
 					<a href="index.php">
 						<img src="img/icons/online_shopping.png">
 						<div class="logo-text">
-							<p class="big-logo">Ecommerce</p>
-							<p class="small-logo">online shop</p>
+							<p class="big-logo">Software Engineering</p>
+							<p class="small-logo">Team 9</p>
 						</div>
 					</a>
 				</div> <!-- logo -->
 				<div class="shop-icon">
-					<div class="dropdown">
+					<!-- <div class="dropdown">
 						<img src="img/icons/account.png">
 						<div class="dropdown-menu">
 							<ul>
                 <li><a href="signin.php">SIGNIN</a></li>
 								<li><a href="signup.php">SIGNUP</a></li>
 							</ul>
+              
 						</div>
+					</div> -->
+          <div class="dropdown">
+          <a href="signin.php">
+						<img src="img/icons/signin.png">
+          </a>
 					</div>
 					<div class="dropdown">
-						<img src="img/icons/shopping_cart.png">
+          <a href="signup.php">
+						<img src="img/icons/signup.png">
+          </a>
 					</div>
           <div class="dropdown">
-						<img src="img/icons/heart.png">
+          <a href="about.php">
+						<img src="img/icons/aboutus.png">
+            </a>
 					</div>
 				</div> <!-- shop icons -->
 			</div> <!-- brand -->

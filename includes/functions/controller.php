@@ -19,6 +19,15 @@ function getCategoryNameById($db, $itemId)
  return $result['categoryName'];
 }
 
+function getTotalItemsByChildCategoryId($childcategoryId, $db) {
+    $sql = "SELECT totalItems FROM childcategory WHERE childcategoryId = :childcategoryId";
+    $stmt = $db->prepare($sql);
+    $stmt->execute(array(':childcategoryId' => $childcategoryId));
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row['totalItems'];
+}
+
+
 function getPriceById($db, $itemId)
 {
  $sql = "SELECT price, discount FROM item WHERE itemId = :itemId";
@@ -334,6 +343,14 @@ function insertItem($title,$Des,$info,$price,$quantity,$childcatId,$discount,$se
         $stmt->bindParam(':childcatId', $childcatId, PDO::PARAM_INT);
         $stmt->execute();
     }
+    function updateTotalItems2($childcatId, $quantity, $db) {
+        echo "okeee";
+        $sql = "UPDATE childcategory SET totalItems = :quantity WHERE childcategoryId = :childcatId";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+        $stmt->bindParam(':childcatId', $childcatId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
     function editTotalItems($childcatId, $quantity, $itemId, $db) {
         $quantity_item = getItemQuantity($itemId, $db);
         $sql = "UPDATE childcategory SET totalItems = totalItems - $quantity_item + :quantity WHERE childcategoryId = :childcatId";
@@ -573,6 +590,13 @@ function updateDescription($db,$itemID,$Des){
     $stmt = $db->prepare($sql);
     $stmt->execute();
 }
+
+function updateInformation($db,$itemID,$Info){
+    $sql="UPDATE `item` SET `information` = '".$Info."' WHERE `item`.`itemId` = ".$itemID."";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+}
+
 function updatePrice($db,$itemID,$price){
     $sql="UPDATE `item` SET `price` = '".$price."' WHERE `item`.`itemId` = ".$itemID."";
     $stmt = $db->prepare($sql);

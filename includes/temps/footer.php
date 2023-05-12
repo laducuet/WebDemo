@@ -7,9 +7,9 @@
 					</div>
 					<div class="widget-content">
 						<ul>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
-							<li><a href="terms.html">Terms & Conditions</a></li>
+							<li><a href="about.php">About</a></li>
+							<li><a href="Instructions.php">Instructions</a></li>
+							<li><a href="term.php">Terms & Conditions</a></li>
 						</ul>
 					</div>
 				</div>

@@ -17,6 +17,7 @@ if (isset($_POST['DONE'])) {
     $_SESSION["discount_item"] = input_data($_POST['discountOfItem']);
     $_SESSION["quantity_item"] = input_data($_POST['quantity']);
     $_SESSION["description_item"] = input_data($_POST['description']);
+    $_SESSION["information_item"] = input_data($_POST['information']);
     $_SESSION["city"] = input_data($_POST['city']);
     $_SESSION["country"] = input_data($_POST['country']);
     $_SESSION["childcategoryId"] = input_data($_POST['childcategory']);
@@ -79,17 +80,23 @@ if (isset($_POST['DONE'])) {
 
 
     if ($_SESSION['city_er'] == "" && $_SESSION['quantity_er'] == "" && $_SESSION['home_er'] == "" && $_SESSION['description_er'] == "" && $_SESSION['item_namerr'] == "" && $_SESSION["pricerr"] == ""
-        && $_SESSION["childcat_er"] == "" && $_SESSION["country_er"] == "" && $_SESSION["st_er"] == "") {
+     && $_SESSION["country_er"] == "" && $_SESSION["st_er"] == "") {
         updateTitle($db, $_SESSION['itemID'], $_SESSION['item_name']);
         updatePrice($db, $_SESSION['itemID'], $_SESSION['price']);
         updateDescription($db, $_SESSION['itemID'], $_SESSION['description_item']);
+        updateInformation($db, $_SESSION['itemID'], $_SESSION["information_item"]);
         updateCountry($db, $_SESSION['itemID'], $_SESSION['country']);
         updateCity($db, $_SESSION['itemID'], $_SESSION['city']);
         updateStreet($db, $_SESSION['itemID'], $_SESSION['st']);
         updateChildCategory($db, $_SESSION['itemID'], $_SESSION['childcategoryId']);
         updateQuantity($db, $_SESSION['itemID'], $_SESSION['quantity_item']);
+
         updateDiscount($db, $_SESSION['itemID'], $_SESSION['discount_item']);
         $_SESSION['DB_er'] = 1;
+
+        // $quantityChilCate1 = getTotalItemsByChildCategoryId($_SESSION['childcategoryId'], $db);
+        // $quantityChilCate1 = $quantityChilCate1 + $_SESSION['quantity_item'];
+        // updateTotalItems2($_SESSION['childcategoryId'], $quantityChilCate1, $db);
 
 
         $targetDir = "data/uploads/items/";
@@ -124,6 +131,7 @@ if (isset($_POST['DONE'])) {
         $_SESSION["discount_item"] = "";
         $_SESSION["quantity_item"] = "";
         $_SESSION["description_item"] = "";
+        $_SESSION["information_item"] = "";
         $_SESSION["city"] = "";
         $_SESSION["country"] = "";
         $_SESSION["childcategoryId"] = "";
@@ -158,6 +166,7 @@ $oldItem = GetItem($db, $_SESSION['itemID']);
 foreach ($oldItem as $item)
     $_SESSION["item_name"] = input_data($item['title']);
 $_SESSION['description_item'] = input_data($item['description']);
+$_SESSION["information_item"] = input_data($item['information']);
 $_SESSION['discount_item'] = input_data($item['discount']);
 $_SESSION['quantity_item'] = input_data($item['quantity']);
 $_SESSION['price'] = input_data($item['price']);
@@ -166,6 +175,11 @@ $_SESSION['country'] = input_data($item['country']);
 $_SESSION['homeNum'] = input_data($item['homeNumber']);
 $_SESSION['st'] = input_data($item['street']);
 $rows = getChildCategoryName($item['childcategoryId'], $db);
+// $quantity = getItemQuantity($item['itemId'], $db);
+// $quantityChilCate = getTotalItemsByChildCategoryId($item['childcategoryId'], $db);
+// $quantityChilCate = $quantityChilCate - $quantity;
+
+//updateTotalItems2($item['childcategoryId'], $quantityChilCate, $db);
 foreach ($rows as $i)
     $_SESSION['childcategoryId'] = $i['childcategoryId'];
 $_SESSION['childcategoryName'] = $i['childcategoryName'];
@@ -210,6 +224,13 @@ if (isset($_GET['deleteImage'])) {
                                 echo $_SESSION["description_er"];
                                 unset($_SESSION["description_er"]);
                             } ?></p>
+                            <div class=" mb-4 input-group">
+            <textarea placeholder="Information(For Game)" rows="2" class="form-control" id="exampleFormControlTextarea1"
+                      name="information"><?php if (isset($_SESSION["information_item"])) {
+                    echo $_SESSION["information_item"];
+                    unset($_SESSION["information_item"]);
+                }; ?></textarea>
+                        </div>
                         <div class="input-group  mb-4">
                             <select value="<?php if (isset($_SESSION["childcategoryId"])) {
                                 echo $_SESSION["childcategoryId"];

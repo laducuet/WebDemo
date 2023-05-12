@@ -44,7 +44,7 @@
 		<meta name="author" content="Kamran Mubarik">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Title -->
- 		<title>E-Commerce Online Shop</title>
+ 		<title>Team 9 CNPM</title>
  		<!-- Style Sheet -->
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" href="<?php echo $css?>bootstrap.min.css">
