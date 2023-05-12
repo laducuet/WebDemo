@@ -21,6 +21,9 @@
   right: 0px;
   padding: 3px 6px;
 }
+/* p.alert-danger.ms-auto.me-auto.pt-5.pb-5 {
+  font-size: 20px;
+} */
 .notification-icon {
   order: 3;
 }

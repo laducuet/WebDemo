@@ -33,7 +33,7 @@ if (isset($_POST['DONE'])) {
     $_SESSION["country_er"] = "";
     $_SESSION['DB_er'] = "";
     $_SESSION['quantity_er'] = "";
-    editTotalItems($_SESSION['childcategoryId'], $_SESSION['quantity_item'],$_SESSION['itemID'], $db);
+    //editTotalItems($_SESSION['childcategoryId'], $_SESSION['quantity_item'],$_SESSION['itemID'], $db);
 
     if ($_SESSION['discount_item'] == "") {
         $_SESSION['discount_item'] = 0;
@@ -94,9 +94,9 @@ if (isset($_POST['DONE'])) {
         updateDiscount($db, $_SESSION['itemID'], $_SESSION['discount_item']);
         $_SESSION['DB_er'] = 1;
 
-        // $quantityChilCate1 = getTotalItemsByChildCategoryId($_SESSION['childcategoryId'], $db);
-        // $quantityChilCate1 = $quantityChilCate1 + $_SESSION['quantity_item'];
-        // updateTotalItems2($_SESSION['childcategoryId'], $quantityChilCate1, $db);
+        $quantityChilCate1 = getTotalItemsByChildCategoryId($_SESSION['childcategoryId'], $db);
+        $quantityChilCate1 = $quantityChilCate1 + $_SESSION['quantity_item'];
+        updateTotalItems2($_SESSION['childcategoryId'], $quantityChilCate1, $db);
 
 
         $targetDir = "data/uploads/items/";
@@ -175,11 +175,10 @@ $_SESSION['country'] = input_data($item['country']);
 $_SESSION['homeNum'] = input_data($item['homeNumber']);
 $_SESSION['st'] = input_data($item['street']);
 $rows = getChildCategoryName($item['childcategoryId'], $db);
-// $quantity = getItemQuantity($item['itemId'], $db);
-// $quantityChilCate = getTotalItemsByChildCategoryId($item['childcategoryId'], $db);
-// $quantityChilCate = $quantityChilCate - $quantity;
-
-//updateTotalItems2($item['childcategoryId'], $quantityChilCate, $db);
+$quantity = getItemQuantity($item['itemId'], $db);
+$quantityChilCate = getTotalItemsByChildCategoryId($item['childcategoryId'], $db);
+$quantityChilCate = $quantityChilCate - $quantity;
+updateTotalItems2($item['childcategoryId'], $quantityChilCate, $db);
 foreach ($rows as $i)
     $_SESSION['childcategoryId'] = $i['childcategoryId'];
 $_SESSION['childcategoryName'] = $i['childcategoryName'];

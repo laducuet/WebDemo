@@ -5,46 +5,44 @@
   $categories = getCategories($db);
   $itemImages = getItemsImages($db);
   $categories = array_reverse($categories);
-  
+
+  $noItems = false;
+  if(isset($_GET['cat'])){
+    $items = getItemsByCategory($db,$_GET['cat']);
+    if(count($items)==0)
+    $noItems = true;
+  }
+  $inputSearchError = false;
+  $noItemsSearch = false;
+  if(isset($_GET['keyword'])){
+    $_GET['keyword'] = htmlspecialchars($_GET['keyword']);
+    if($_GET['keyword'] == "")
+      $inputSearchError =true;
+    else {
+    $items = searchForItems($db,$_GET['keyword']);
+    if(count($items)==0)
+      $noItemsSearch = true;
+    }
+  }
 ?>
 
-<!-- <div class="mua_acc_section">
-    <div id="main_slider" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="container">
-            <h1 class="mua_acc_taital">DANH MỤC ACC EFOOTBALL MOBILE</h1>
-            <div class="mua_acc_section_2">
-              <div class="row">
-                <//?php foreach($categories as $cat): ?>
-                  <div class="col-lg-4 col-sm-4">
-                    <div class="box_main">
-                      <h4 class="shirt_text" ><//?php echo $cat['categoryName'] ?></h4>
-                      <div class="tshirt_img">
-                        <img src="images/accthuong.png" />
-                      </div>
-                      <div class="see_all">
-                        <ul>
-                          <li><a href="
-                          <//?php echo "childcat.php?cat=".urlencode($cat['categoryId']); ?>">Xem tất cả</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <//?php endforeach; ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- <//?php
-//include $tpl . "footer.php";
-//ob_end_flush(); ?> -->
+
 
 <div class="container">
+
 		<main>
+			<div class="text-center">
+		<?php if(isset($_GET['keyword'])&&($inputSearchError)): ?>
+      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
+      <?php elseif(isset($_GET['keyword'])&&($noItemsSearch)): ?>
+      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
+        <?php echo " " .$_GET['keyword']; ?> </p>
+      <?php elseif($noItems): ?>
+      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
+      <?php else: ?>
+		
+	  <?php endif ?>
+	  </div>
 			<div class="breadcrumb">
 			</div> <!-- End of Breadcrumb-->
 

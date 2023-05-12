@@ -38,7 +38,6 @@
                             if($items[$i]['childcategoryId']==$childcat['childcategoryId']){
                                 $quantity = getQuantityFromOrdersAndItems($items[$i]['itemId'], $db);
                                 $count = $count + $quantity;
-
                               } 
                             }
                           echo $count;

@@ -66,6 +66,7 @@ header("Location: signin.php");
 							</ul>
 						</div>
 					</div>
+          
 					<div class="dropdown">
 						<?php if($_SESSION["typeOfUser"]==="buyer"): ?>
 						<a href="<?php echo "cart.php?username=".$User[0]['userName']?>">
@@ -122,17 +123,17 @@ header("Location: signin.php");
 						</div>
 					</a>
 				</div> <!-- logo -->
-				<div class="shop-icon">
-					<!-- <div class="dropdown">
-						<img src="img/icons/account.png">
-						<div class="dropdown-menu">
-							<ul>
-                <li><a href="signin.php">SIGNIN</a></li>
-								<li><a href="signup.php">SIGNUP</a></li>
-							</ul>
-              
+        <div class="menu-bar">
+				<div class="search-bar">
+					<form>
+						<div class="form-group">
+							 <input type="text" class="form-control" name="keyword" placeholder="Search">
+							<img src="img/icons/search.png">
 						</div>
-					</div> -->
+					</form>
+				</div>
+			</div> <!-- menu -->
+				<div class="shop-icon">
           <div class="dropdown">
           <a href="signin.php">
 						<img src="img/icons/signin.png">
@@ -148,7 +149,9 @@ header("Location: signin.php");
 						<img src="img/icons/aboutus.png">
             </a>
 					</div>
+          
 				</div> <!-- shop icons -->
+        
 			</div> <!-- brand -->
 		</div> <!-- container -->
 	</header> <!-- header -->
