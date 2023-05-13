@@ -141,6 +141,7 @@ header .menu-bar{
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 30px;
+	width: 100%;
 }
 header .menu ul{
 	width: 180px;
@@ -162,14 +163,17 @@ header .menu ul li a:hover{
 	border-bottom: 2px solid var(--darkStaleGray);;
 }
 header .search-bar{
-	width: 300px;
-	height: 30px;
+    width: 60%;
+    display: block;
+    height: 50px;
+    padding-top: 15px;
+	margin: auto;
 }
 header .form-group{
 	position: relative;
 }
 header .form-group input{
-	width: 150%;
+	width: 100%;
 	height: 28px;
 	position: absolute;
 	right: 25px;

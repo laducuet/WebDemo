@@ -48,13 +48,13 @@
    <main>
       <div class="text-center">
          <?php if(isset($_GET['keyword'])&&($inputSearchError)): ?>
-         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
+         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%; font-size: 24px">Enter a valid value!</p>
          <?php elseif(isset($_GET['keyword'])&&($noItemsSearch)): ?>
-         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
+         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%; font-size: 24px">No items match this word
             <?php echo " " .$_GET['keyword']; ?> 
          </p>
          <?php elseif($noItems): ?>
-         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
+         <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%; font-size: 24px">No items in this Category</p>
          <?php else: ?>
             <div class="main-page pb-5 pt-5 bg-light">
     <div class="text-center">
