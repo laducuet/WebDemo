@@ -12,7 +12,7 @@
 		<main>
 			<div class="about">
 				<h2 class="heading">Instructions</h2>
-				<p>Hướng dẫn đăng kí, đăng nhập, đăng sản phẩm, mua hàng các thứ...</p>
+				<p>Instructions for registration, login, product posting, purchase ...</p>
 			</div>
 		</main> <!-- Main Area -->
 	</div>

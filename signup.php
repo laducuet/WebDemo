@@ -250,7 +250,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
             </div>
             <div class="col-lg-7 col-md-12 order-lg-first">
-                <img src=" <?php echo $imgs . "Signup.png" ?>" alt="Login image" class="img-fluid">
+                <img src=" <?php echo $imgs . "OIP.png" ?>" alt="Login image" class="img-fluid">
             </div>
         </div>
     </div>

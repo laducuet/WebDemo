@@ -9,7 +9,7 @@
 		<main>
 			<div class="about">
 				<h2 class="heading">Terms and Conditions</h2>
-				<p>Lorem ipsum dolor, sit amet consectetur</p>
+				<p>Terms and Conditions of Website</p>
 			</div>
 		</main> <!-- Main Area -->
 	</div>

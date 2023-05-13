@@ -1041,3 +1041,7 @@ main .account-page .account-detail table td{
 	text-align: center;
 	border: 1px solid #eee;
 }
+
+.modal-backdrop {
+	display: none;
+  }

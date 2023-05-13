@@ -14,14 +14,12 @@
 					</div>
 				</div>
 				<div class="widget">
-					<div class="widget-heading">
-						<h3>Information</h3>
-					</div>
 					<div class="widget-content">
 						<ul>
-							<li><a href="account.html">My Account</a></li>
-							<li><a href="orders.html">My Orders</a></li>
-							<li><a href="cart.html">Cart</a></li>
+							<li>Le Anh Duc</li>
+							<li>Nguyen Tu Trung</li>
+							<li>Le Hai Nam</li>
+							<li>Nguyen Quang Thanh</li>
 						</ul>
 					</div>
 				</div>
@@ -39,7 +37,7 @@
 						</div>						
 					</div>
 					<div class="widget-heading">
-						<h3>Subscribe for Newsletter</h3>
+						<h3>Subscribe for Team 9</h3>
 					</div>
 					<div class="widget-content">
 						<div class="subscribe">
