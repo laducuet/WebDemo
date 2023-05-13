@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 09:45 PM
+-- Generation Time: May 13, 2023 at 02:42 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -87,10 +87,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ID`, `fName`, `lName`, `userName`, `email`, `password`) VALUES
-(1, 'Beshoy', 'Morad', 'admin', 'beshoy@gmail.com', '123456'),
-(2, 'Zeyad', 'Tarek', 'ZeyadTarek', 'Zeyad.Ta01@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb'),
-(3, 'Abdelrahman', 'Mohamed', 'Abdelrahman', 'a.m.hamza156@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb'),
-(7, 'Ziad', 'Sherif', 'ZiadSherif', 'zsherif308@gmail.com', 'c271a80ee083d5024fdf5ad6dd38651085f4e8eb');
+(1, 'NguyenTu', 'Trung', 'admin', 'admin@gmail.com', '4cb7a9e4b9acfd6d97a5aa9c1b83c3947a29c53f');
 
 -- --------------------------------------------------------
 
@@ -117,15 +114,6 @@ CREATE TABLE `bill` (
   `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bill`
---
-
-INSERT INTO `bill` (`ID`, `numberOfItems`, `orderTotal`, `cartId`, `firstname`, `lastname`, `isShip`, `companyname`, `address`, `optional`, `city`, `country`, `postcode`, `email`, `phone`, `notes`) VALUES
-(1, 0, 360, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'Nguyen Khanh Toan', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 'trungcnttvnu@gmail.com', '+84355287940', 'aa'),
-(2, 0, 572, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'CoNhue', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 's1mpleuet@gmail.com', '123456789', ''),
-(3, 0, 392, 23, 'Trung', 'Nguyễn Tử', 1, 'UET', 'Nguyen Khanh Toan', 'Quan Hoa', 'TP Hà Nội', 'Vietnam', '100000', 'trungcnttvnu@gmail.com', '+84355287940', 'aa');
-
 -- --------------------------------------------------------
 
 --
@@ -148,13 +136,6 @@ CREATE TABLE `buyer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `buyer`
---
-
-INSERT INTO `buyer` (`ID`, `userName`, `password`, `joinDate`, `email`, `fName`, `lName`, `cartId`, `likes`, `disLikes`, `transactions`, `Amount`) VALUES
-(4, 'user', '123456', '2023-05-11', 'trungcnttvnu@gmail.com', 'Trung', 'NguyenTu', 23, 3, 2, 5, 98837);
-
---
 -- Triggers `buyer`
 --
 DELIMITER $$
@@ -174,19 +155,6 @@ CREATE TABLE `buyernotification` (
   `ownerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `buyernotification`
---
-
-INSERT INTO `buyernotification` (`notificationId`, `sellerId`, `ownerID`) VALUES
-(80, 4, 4),
-(81, 4, 4),
-(82, 4, 4),
-(83, 4, 4),
-(85, 4, 4),
-(86, 4, 4),
-(87, 4, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -198,13 +166,6 @@ CREATE TABLE `cart` (
   `itemCount` int(11) NOT NULL,
   `payment` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cartId`, `itemCount`, `payment`) VALUES
-(23, 14, 3534.16);
 
 -- --------------------------------------------------------
 
@@ -272,11 +233,11 @@ CREATE TABLE `childcategory` (
 --
 
 INSERT INTO `childcategory` (`childcategoryId`, `childcategoryName`, `categoryId`, `childcategoryDescription`, `totalItems`) VALUES
-(11, 'ACC THƯỜNG', 10, 'accthuong', 0),
+(11, 'ACC THƯỜNG', 10, 'accthuong', 1),
 (12, 'ACC RANDOM', 10, 'accrandom', 0),
-(13, 'ACC VIP', 10, 'accvip', 123),
-(14, 'HP', 11, 'hp', 24),
-(15, 'DELL', 11, 'dell', 120),
+(13, 'ACC VIP', 10, 'accvip', 0),
+(14, 'HP', 11, 'hp', 10),
+(15, 'DELL', 11, 'dell', 0),
 (16, 'ACER', 11, 'acer', 0),
 (17, 'ASUS', 11, 'asus', 0),
 (18, 'APPLE', 11, 'apple', 0),
@@ -329,16 +290,6 @@ CREATE TABLE `item` (
   `country` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `item`
---
-
-INSERT INTO `item` (`itemId`, `title`, `description`, `information`, `price`, `quantity`, `addDate`, `isDeleted`, `isSaled`, `childcategoryId`, `sellerId`, `startDate`, `endDate`, `discount`, `homeNumber`, `street`, `city`, `country`) VALUES
-(51, 'MS1', 'aaaaa', NULL, 60, 0, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 12, 12, 'HN', 'HN', 'VN'),
-(52, 'MS2', 'aaaa', NULL, 100, 89, '2023-05-10', 0, 1, 13, 4, NULL, NULL, 11, 111, 'HN', 'HN', 'Vietnam'),
-(54, 'MS1', 'LapTop', NULL, 200, 15, '2023-05-11', 0, 1, 14, 4, NULL, NULL, 10, 12, 'HN', 'HN', 'VN'),
-(55, 'aa', 'aaa', '', 12, 120, '2023-05-12', 0, 0, 15, 4, NULL, NULL, 12, 1, 'HN', 'HN', 'Vietnam');
-
 -- --------------------------------------------------------
 
 --
@@ -349,16 +300,6 @@ CREATE TABLE `itemimage` (
   `itemId` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `itemimage`
---
-
-INSERT INTO `itemimage` (`itemId`, `image`) VALUES
-(51, '645a8e7d2bbc1-1683656317.jpg'),
-(52, '645b6bfd3911c-1683713021.jpg'),
-(54, '645c7c1e9e0cd-1683782686.jpg'),
-(55, '645d407cab13f-1683832956.jpg');
 
 -- --------------------------------------------------------
 
@@ -376,10 +317,7 @@ CREATE TABLE `mobileadmin` (
 --
 
 INSERT INTO `mobileadmin` (`adminId`, `phone`) VALUES
-(1, '01273311810'),
-(2, '01206583954'),
-(3, '01150530696'),
-(7, '01146188908');
+(1, '0355287940');
 
 -- --------------------------------------------------------
 
@@ -392,13 +330,6 @@ CREATE TABLE `mobilebuyer` (
   `phone` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `mobilebuyer`
---
-
-INSERT INTO `mobilebuyer` (`buyerId`, `phone`) VALUES
-(4, '0355287940');
-
 -- --------------------------------------------------------
 
 --
@@ -409,28 +340,6 @@ CREATE TABLE `mobileseller` (
   `sellerId` int(11) NOT NULL,
   `phoneNo` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `mobileseller`
---
-
-INSERT INTO `mobileseller` (`sellerId`, `phoneNo`) VALUES
-(4, '123456789'),
-(4, '753159462'),
-(4, '789123456'),
-(4, '789632145'),
-(4, '789654123'),
-(5, '123456789'),
-(6, '123456789'),
-(7, '123456789'),
-(8, '123456789'),
-(9, '123456789'),
-(10, '123456789'),
-(11, '123456789'),
-(12, '123456789'),
-(13, '1234567890'),
-(14, '12345678'),
-(15, '123456789');
 
 -- --------------------------------------------------------
 
@@ -444,74 +353,6 @@ CREATE TABLE `notification` (
   `date` date NOT NULL DEFAULT curdate(),
   `seen` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `notification`
---
-
-INSERT INTO `notification` (`id`, `message`, `date`, `seen`) VALUES
-(19, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Scrub, Quantity: 40, Price: 6400, at 2022-01-06', '2022-01-06', 1),
-(20, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Containers, Quantity: 4, Price: 232.8, at 2022-01-06', '2022-01-06', 1),
-(21, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Jar, Quantity: 3, Price: 330, at 2022-01-06', '2022-01-06', 1),
-(22, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: College Books, Quantity: 2, Price: 95, at 2022-01-06', '2022-01-06', 1),
-(23, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Bottles, Quantity: 10, Price: 1300, at 2022-01-06', '2022-01-06', 1),
-(25, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Books, Quantity: 4, Price: 120, at 2022-01-06', '2022-01-06', 1),
-(26, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Bottles, Quantity: 10, Price: 500, at 2022-01-06', '2022-01-06', 1),
-(28, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Small Jars, Quantity: 10, Price: 980, at 2022-01-06', '2022-01-06', 1),
-(30, 'Hello Emma Oliver, Aya Ahmed ordered your item: Containers, Quantity: 10, Price: 582, at 2022-01-06', '2022-01-06', 1),
-(31, 'Hello Emma Oliver, Aya Ahmed ordered your item: College Books, Quantity: 10, Price: 475, at 2022-01-06', '2022-01-06', 1),
-(32, 'Hello Emma Oliver, Aya Ahmed ordered your item: Bottles, Quantity: 15, Price: 1950, at 2022-01-06', '2022-01-06', 1),
-(34, 'Hello Emma Oliver, Ahmed Mohamed ordered your item: Bottles, Quantity: 20, Price: 2600, at 2022-01-06', '2022-01-06', 1),
-(37, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Laptops, Quantity: 20, Price: 11200, at 2022-01-06', '2022-01-06', 1),
-(38, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Washing machines, Quantity: 20, Price: 17000, at 2022-01-06', '2022-01-06', 1),
-(39, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Computers, Quantity: 10, Price: 6000, at 2022-01-06', '2022-01-06', 1),
-(40, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: Mobiles, Quantity: 10, Price: 2700, at 2022-01-06', '2022-01-06', 1),
-(43, 'Hello AyaAhmed regarding your order for Washing machines, quantity: 20, price: 17000, at 2022-01-06 we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(44, 'Hello AyaAhmed regarding your order for Washing machines, quantity: 20, price: 17000, at 2022-01-06 we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(45, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Washing machines, Quantity: 5, Price: 4250, at 2022-01-07', '2022-01-06', 1),
-(46, 'Hello AyaAhmed regarding your order for Washing machines, quantity: 20, price: 17000, at 2022-01-06 we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(47, 'Hello AyaAhmed regarding your order for Washing machines, quantity: 5, price: 4250, at 2022-01-06 we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(48, 'Hello AyaAhmed regarding your order for Laptops, quantity: 20, price: 11200 ,at address    we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(49, 'Hello AyaAhmed regarding your order for Laptops, quantity: 20, price: 11200 ,at address 13 El Alfy St El Azbakia Down Town we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(50, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Mobiles, Quantity: 10, Price: 2700, at 2022-01-07', '2022-01-06', 1),
-(51, 'Hello AyaAhmed regarding your order for Mobiles, quantity: 10, price: 2700 ,at address 23 Extension Of el bahr st Tanta we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-06', 1),
-(52, 'Hello Emma Oliver, Aya Ahmed ordered your item: Containers, Quantity: 4, Price: 232.8, at 2022-01-08', '2022-01-08', 1),
-(53, 'Hello AyaAhmed regarding your order for Containers, quantity: 4, price: 232.8 ,at address 6 Baker Kalamazoo we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-08', 1),
-(54, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: Computers, Quantity: 1, Price: 600, at 2022-01-08', '2022-01-08', 1),
-(55, 'Hello ahmed regarding your order for Computers, quantity: 1, price: 600 ,at address 123 A El Gomhoureya St Abdin Cairo we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2022-01-08', 1),
-(56, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: Washing machines, Quantity: 10, Price: 8500, at 2022-01-08', '2022-01-08', 1),
-(57, 'Hello Emma Oliver, Aya Ahmed ordered your item: Clothes, Quantity: 5, Price: 190, at 2022-01-08', '2022-01-08', 1),
-(58, 'Hello Ahmed Elsaid, Aya Ahmed ordered your item: Pens and pencils, Quantity: 5, Price: 220, at 2022-01-08', '2022-01-08', 1),
-(59, 'Hello Emma Oliver, Aya Ahmed ordered your item: Books, Quantity: 8, Price: 240, at 2022-01-08', '2022-01-08', 1),
-(60, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS 200, Quantity: 3, Price: 135, at 2023-05-07', '2023-05-07', 1),
-(61, 'Hello ahmed regarding your order for MS 200, quantity: 3, price: 135 ,at address 1 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-07', 1),
-(62, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS 1, Quantity: 12, Price: 1680, at 2023-05-08', '2023-05-09', 1),
-(63, 'Hello ahmed regarding your order for MS 1, quantity: 12, price: 1680 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-09', 1),
-(64, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 4, Price: 211.2, at 2023-05-09', '2023-05-10', 1),
-(65, 'Hello ahmed regarding your order for MS1, quantity: 4, price: 211.2 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
-(66, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 2, Price: 105.6, at 2023-05-10', '2023-05-10', 1),
-(67, 'Hello ahmed regarding your order for MS1, quantity: 2, price: 105.6 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
-(68, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 2, Price: 105.6, at 2023-05-10', '2023-05-10', 1),
-(69, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 4, Price: 211.2, at 2023-05-10', '2023-05-10', 1),
-(70, 'Hello ahmed regarding your order for MS1, quantity: 4, price: 211.2 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-10', 1),
-(71, 'Hello ahmed regarding your order for MS1, quantity: 2, price: 105.6 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
-(72, 'Hello Ahmed Elsaid, Ahmed Mohamed ordered your item: MS1, Quantity: 1, Price: 52.8, at 2023-05-10', '2023-05-10', 1),
-(73, 'Hello ahmed regarding your order for MS1, quantity: 1, price: 52.8 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-10', 1),
-(74, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 0),
-(75, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS1, Quantity: 3, Price: 158.4, at 2023-05-11', '2023-05-11', 1),
-(76, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 1),
-(77, 'Hello Ahmed Elsaid, NguyenTu Trung ordered your item: MS2, Quantity: 10, Price: 890, at 2023-05-11', '2023-05-11', 1),
-(78, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(79, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 1, Price: 89, at 2023-05-11', '2023-05-11', 1),
-(80, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(81, 'Hello user regarding your order for MS1, quantity: 1, price: 180 ,at address 12 HN HN we want to inform you that it has been declined\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(82, 'Hello user regarding your order for MS1, quantity: 2, price: 360 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(83, 'Hello user regarding your order for MS2, quantity: 1, price: 89 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(84, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 3, Price: 267, at 2023-05-11', '2023-05-11', 1),
-(85, 'Hello user regarding your order for MS2, quantity: 3, price: 267 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(86, 'Hello user regarding your order for MS2, quantity: 3, price: 267 ,at address 111 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(87, 'Hello user regarding your order for MS1, quantity: 3, price: 540 ,at address 12 HN HN we want to inform you that it has been accepted\n you can communicate with the seller through 123456789', '2023-05-11', 0),
-(88, 'Hello Ahmed Elsaid, Trung NguyenTu ordered your item: MS2, Quantity: 2, Price: 178, at 2023-05-11', '2023-05-12', 0);
 
 -- --------------------------------------------------------
 
@@ -531,18 +372,6 @@ CREATE TABLE `orders` (
   `isShip` tinyint(1) NOT NULL DEFAULT 0,
   `billId` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`orderId`, `cartId`, `orderPrice`, `quantity`, `orderDate`, `buyerId`, `itemId`, `status`, `isShip`, `billId`) VALUES
-(1, 23, 360, 2, '2023-05-12', 4, 54, 0, 1, 1),
-(2, 23, 31.68, 3, '2023-05-12', 4, 54, 0, 1, 2),
-(3, 23, 31.68, 3, '2023-05-12', 4, 55, 0, 1, 2),
-(4, 23, 178, 2, '2023-05-12', 4, 52, 0, 0, 0),
-(5, 23, 21.12, 2, '2023-05-12', 4, 54, 0, 1, 3),
-(6, 23, 31.68, 3, '2023-05-12', 4, 55, 0, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -565,24 +394,6 @@ CREATE TABLE `seller` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `seller`
---
-
-INSERT INTO `seller` (`ID`, `userName`, `password`, `joinDate`, `email`, `fName`, `lName`, `likes`, `disLikes`, `transactions`, `Amount`) VALUES
-(4, 'AhmedElsaid', '123456', '2022-01-06', 'Ahmed2@gmail.com', 'Ahmed', 'Elsaid', 2, 1, 19, 101163),
-(5, 'Liam', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Liam@gmail.com', 'Liam', 'Noah', 0, 0, 0, 100000),
-(6, 'Olivia', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Olivia@gmail.com', 'Olivia', 'Liam', 0, 0, 0, 100000),
-(7, 'Emma', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Emma@gmail.com', 'Emma', 'Oliver', 4, 3, 4, 100000),
-(8, 'Sophia', '299129b6ca094e4621e97d763f754a69fd436789', '2022-01-06', 'Sophia@gmail.com', 'Sophia', 'Alexander', 0, 0, 0, 100000),
-(9, 'Evelyn', '299129b6ca094e4621e97d763f754a69fd436789', '2022-01-06', 'Evelyn@gmail.com', 'Evelyn', 'James', 0, 0, 0, 100000),
-(10, 'Isabella', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Isabella@gmail.com', 'Isabella', 'William', 0, 0, 0, 100000),
-(11, 'Benjamin', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'Benjamin@gmail.com', 'Benjamin', 'Henry', 0, 0, 0, 100000),
-(12, 'BiancaSawyer', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'BiancaSawyer@gmail.com', 'Bianca', 'Sawyer', 0, 0, 0, 100000),
-(13, 'HayleighKinney', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'HayleighKinney@gmail.com', 'Hayleigh', 'Kinney', 0, 0, 0, 100000),
-(14, 'KallumHolder', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'KallumHolder@gmail.com', 'Kallum', 'Holder', 0, 0, 0, 100000),
-(15, 'NabeelaBallard', 'a57ae0fe47084bc8a05f69f3f8083896f8b437b0', '2022-01-06', 'NabeelaBallard@gm.com', 'Nabeela', 'Ballard', 0, 0, 0, 100000);
-
---
 -- Triggers `seller`
 --
 DELIMITER $$
@@ -601,15 +412,6 @@ CREATE TABLE `sellernotifications` (
   `buyerId` int(11) NOT NULL,
   `ownerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `sellernotifications`
---
-
-INSERT INTO `sellernotifications` (`notificationId`, `buyerId`, `ownerID`) VALUES
-(79, 4, 4),
-(84, 4, 4),
-(88, 4, 4);
 
 --
 -- Indexes for dumped tables
@@ -742,25 +544,25 @@ ALTER TABLE `sellernotifications`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `buyer`
 --
 ALTER TABLE `buyer`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -778,25 +580,25 @@ ALTER TABLE `childcategory`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables

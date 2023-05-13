@@ -1,7 +1,7 @@
 <?php
 
 // connect to the database
-$dsn = 'mysql:host=localhost;dbname=dawrhashop';
+$dsn = 'mysql:host=localhost;dbname=shop_team9';
 $user = 'root';
 $pass = '';
 $options = array (
