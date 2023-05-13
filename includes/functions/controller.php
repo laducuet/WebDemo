@@ -114,6 +114,23 @@ function getSellerId($db,$id){
   return $result;
 }
 
+function getItemIDsBySellerID($sellerID, $db) {
+    $stmt = $db->prepare("SELECT itemId FROM item WHERE sellerId = :sellerId");
+    $stmt->bindParam(':sellerId', $sellerID);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $result;
+}
+
+function getOrdersByItemID($itemId, $db) {
+    $stmt = $db->prepare("SELECT * FROM orders WHERE orders.itemId = :itemId AND status = 1");
+    $stmt->bindParam(':itemId', $itemId);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
+
 function getNotificationsForBuyer($db,$ownerID){
   $sql = "SELECT DISTINCT n.id, message,date,seen,sellerId,ownerID, s.fName ,s.lName  from notification as n , buyernotification , seller as s WHERE n.id = notificationId and ownerID =". $ownerID ." and s.ID = sellerId ORDER by date DESC;";
   $stmt = $db->query($sql);
@@ -938,6 +955,40 @@ function makeAnOrder($db,$cartId,$buyerId,$itemID,$orderPrice,$quantity){
     $stmt10 = $db->prepare($sql10);
     $stmt10->execute(array(":orderPrice"=>$orderPrice,":buyerId"=>$buyerId));
     $stmt10->closeCursor();
+
+    date_default_timezone_set("EET");
+    $date = date('Y-m-d', time());
+
+    $msg = "Hello ".$result6[0]['fName']." " .$result6[0]['lName'].", " .$result7[0]['fName'] ." ". $result7[0]['lName']." ordered your item: ".$result5[0]['title'].", Quantity: ".$quantity.", Price: ".$orderPrice.", at ".$date;
+    
+    
+    $sql8 = "INSERT INTO notification(message) VALUES('$msg')";
+    $db->exec($sql8);
+    $notiID = $db->lastInsertId();
+
+
+    $sql9 = "INSERT INTO sellernotifications VALUES('$notiID','$buyerId','$sellerID')";
+    $db->exec($sql9);
+    
+    return -1;
+}
+
+function insertNotication($itemID,$buyerId,$orderPrice,$quantity,$db) {
+    $sql5 = "SELECT item.quantity, item.sellerId, item.title from item WHERE item.itemId = $itemID";
+    $stmt5 = $db->query($sql5);
+    $result5 = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+    $stmt5->closeCursor();
+    $sellerID = $result5[0]['sellerId'];
+
+    $sql6 = "SELECT fName, lName from seller WHERE ID = $sellerID";
+    $stmt6 = $db->query($sql6);
+    $result6 = $stmt6->fetchAll(PDO::FETCH_ASSOC);
+    $stmt6->closeCursor();
+    
+    $sql7 = "SELECT fName, lName, cartId from buyer WHERE ID = $buyerId";
+    $stmt7 = $db->query($sql7);
+    $result7 = $stmt7->fetchAll(PDO::FETCH_ASSOC);
+    $stmt7->closeCursor();
 
     date_default_timezone_set("EET");
     $date = date('Y-m-d', time());

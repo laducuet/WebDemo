@@ -95,6 +95,7 @@
         if ($cateName != "GAME") {
             $orderPrice = $cartitemgame[$i]['quantity'] * $price['price'] * (1 - $price['discount']/100);
             insertOrder($cartID, $orderPrice, $cartitemgame[$i]['quantity'], $_SESSION["id"], $cartitemgame[$i]['itemId'], $_SESSION["isShip"], $maxbillId, $db);
+            insertNotication($cartitemgame[$i]['itemId'], $_SESSION["id"],$orderPrice, $cartitemgame[$i]['quantity'],$db);
             deleteItemCart($cartID, $cartitemgame[$i]['itemId'], $db);
         }
       }      

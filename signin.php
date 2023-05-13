@@ -16,7 +16,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if (isset($_SESSION["printUserName"]))
             unset($_SESSION["printUserName"]);
         $username = htmlentities($_POST['username']);
-        $password = ($_POST['password']);
+        $password = sha1($_POST['password']);
         $truePassword_id = getBuyerPassword_ID($username,$db);
         if($truePassword_id!=false)
             $typeOfUser = "buyer";

@@ -52,6 +52,16 @@ header("Location: signin.php");
 						</div>
 					</a>
 				</div> <!-- logo -->
+        <div class="menu-bar">
+				<div class="search-bar">
+					<form>
+						<div class="form-group">
+							 <input type="text" class="form-control" name="keyword" placeholder="Search">
+							<img src="img/icons/search.png">
+						</div>
+					</form>
+				</div>
+			</div> <!-- menu -->
 				<div class="shop-icon">
 					<div class="dropdown">
 						<img src="img/icons/account.png">
@@ -62,17 +72,19 @@ header("Location: signin.php");
                 <?php elseif($_SESSION["typeOfUser"]==="seller"): ?>
                   <li><a href="profileSeller.php">PROFILE</a></li>
                 <?php endif; ?>
-								<li><a href="logout.php">LOGOUT</a></li>
+								<?php if($_SESSION["typeOfUser"]==="buyer"): ?>
+                  <li><a href="<?php echo "cart.php?username=".$User[0]['userName']?>">CART</a></li>
+                <?php elseif($_SESSION["typeOfUser"]==="seller"): ?>
+                  <li><a href="history.php">HISTORY</a></li>
+                <?php endif; ?>
 							</ul>
 						</div>
 					</div>
           
 					<div class="dropdown">
-						<?php if($_SESSION["typeOfUser"]==="buyer"): ?>
-						<a href="<?php echo "cart.php?username=".$User[0]['userName']?>">
-							<img src="img/icons/shopping_cart.png">
+						<a href="logout.php">
+							<img src="img/icons/logout.png">
 						</a>
-						<?php endif; ?>
 						
 					</div>
           <div class="dropdown">

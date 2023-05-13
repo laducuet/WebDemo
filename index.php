@@ -29,20 +29,19 @@
 
 
 <div class="container">
-
 		<main>
 			<div class="text-center">
-		<?php if(isset($_GET['keyword'])&&($inputSearchError)): ?>
-      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
-      <?php elseif(isset($_GET['keyword'])&&($noItemsSearch)): ?>
-      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
-        <?php echo " " .$_GET['keyword']; ?> </p>
-      <?php elseif($noItems): ?>
-      <p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
-      <?php else: ?>
-		
-	  <?php endif ?>
-	  </div>
+				<?php if(isset($_GET['keyword'])&&($inputSearchError)): ?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
+				<?php elseif(isset($_GET['keyword'])&&($noItemsSearch)): ?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
+				<?php echo " " .$_GET['keyword']; ?> </p>
+				<?php elseif($noItems): ?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
+				<?php else: ?>
+					
+				<?php endif ?>
+	  		</div>
 			<div class="breadcrumb">
 			</div> <!-- End of Breadcrumb-->
 

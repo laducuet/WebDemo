@@ -129,7 +129,7 @@
                                     </table>
                                 </div>
                                 <div class="order-button-payment mt-20">
-                                    <button onclick="window.history.back()" type="submit" class="tp-btn-h1">Return Order</button>
+                                    <button onclick="window.history.back()" type="submit" class="tp-btn-h1">RETURN</button>
                                 </div>
                             </div>
                         </div>
