@@ -138,11 +138,11 @@ header("Location: signin.php");
         <div class="menu-bar">
 				<div class="search-bar">
 					<form action="searchItem.php" method="GET">
-						<div class="form-group">
-							 <input type="text" class="form-control" name="keyword" placeholder="Search">
-							<img src="img/icons/search.png">
-						</div>
-					</form>
+  <div class="form-group">
+    <input type="text" class="form-control" name="keyword" placeholder="Search">
+    <img src="img/icons/search.png">
+  </div>
+</form>
 				</div>
 			</div> <!-- menu -->
 				<div class="shop-icon">
@@ -167,6 +167,7 @@ header("Location: signin.php");
 			</div> <!-- brand -->
 		</div> <!-- container -->
 	</header> <!-- header -->
+  
 <?php endif;
 ob_end_flush();
 ?>

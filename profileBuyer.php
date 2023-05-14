@@ -19,8 +19,21 @@ $pendingOrderedItems = getBuyerPendingOrderedItems($_SESSION['id'], $db);
 $acceptedOrderedItems = getBuyerAcceptedOrderedItems($_SESSION['id'], $db);
 $rejectedOrderedItems = getBuyerRejectedOrderedItems($_SESSION['id'], $db);
 
+
 ?>
 
+<?php if(isset($_GET['keyword'])): ?>
+					<?php if ($inputSearchError) :?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
+					<?php elseif(($noItemsSearch)): ?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
+						<?php echo " " .$_GET['keyword']; ?> </p>
+					<?php elseif($noItems): ?>
+					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
+					<?php else: ?>
+						<?php header("Location: searchItem.php?keyword=".$_GET['keyword']); ?>
+					<?php endif ?>
+				<?php else : ?>
 
     <div class="container p-3 position-static">
         <div class="row shadow rounded p-3 m-5 text-lg-start text-md-center text-sm-center border-start border-5 border-success">
@@ -297,7 +310,7 @@ $rejectedOrderedItems = getBuyerRejectedOrderedItems($_SESSION['id'], $db);
                 </section>
             </div>
         </div>
-
-
+        <?php endif ?>
     </div>
+    
 <?php include $tpl . "footer.php";ob_end_flush();?>
