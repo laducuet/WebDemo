@@ -510,7 +510,7 @@ $deletedItems = getSellerDeletedItems($_GET['id'], $db);
                     as $forSaleItem) {
                     $imageName = getImageOfAnItem($forSaleItem->itemId,$db);
                     $childcategory = getchildcategory($forSaleItem->childcategoryId, $db)[0];
-                    $countOrders = getPendingOrdersCount($forSaleItem->itemId,$db)[0];
+                    $countOrders = getPendingOrdersCount($forSaleItem->itemId,$db);
                     echo '
                     <div class="col-lg-3 m-0 text-center">
                         <div class="card m-md-auto shadow" style="width: 18rem;">
@@ -566,7 +566,7 @@ $deletedItems = getSellerDeletedItems($_GET['id'], $db);
                     as $soldItem) {
                     $imageName = getImageOfAnItem($soldItem->itemId,$db);
                     $childcategory = getchildcategory($soldItem->childcategoryId, $db)[0];
-                    $countOrders = getPendingOrdersCount($soldItem->itemId,$db)[0];
+                    $countOrders = getPendingOrdersCount($soldItem->itemId,$db);
                     echo '
                     <div class="col-lg-3 m-0 text-center">
                         <div class="card m-md-auto shadow" style="width: 18rem;">

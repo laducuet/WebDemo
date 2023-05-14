@@ -275,8 +275,14 @@ function insertOrder($cartId, $orderPrice, $quantity, $buyerId, $itemId, $isShip
     $stmt->bindParam(':isShip', $isShip);
     $stmt->bindParam(':billId', $billId);
     $stmt->execute();
-    $last_id = $db->lastInsertId();
-    return $last_id;
+    $stmt->closeCursor();
+
+    $sql4 = "UPDATE item set item.quantity = item.quantity - :itemQTY WHERE itemId = :itemIDD;";
+    $stmt4 = $db->prepare($sql4);
+    $stmt4->execute(array(":itemQTY"=>$quantity,":itemIDD"=>$itemId));
+    $stmt4->closeCursor();
+
+    return -1;
 }
 
    

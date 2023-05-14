@@ -64,15 +64,7 @@ if (isset($_POST['DONE'])) {
     if (!(filter_var($_SESSION["price"], FILTER_VALIDATE_FLOAT) === 0 || filter_var($_SESSION["price"], FILTER_VALIDATE_FLOAT)) || floatval($_SESSION["price"]) < 0) {
         $_SESSION["pricerr"] = "* Invalid Number";
     }
-
-    //street validation
-    if (!ctype_alpha(str_replace(' ', '', $_SESSION['st']))) {
-        $_SESSION["st_er"] = "* Only Alphabets and White Space Are Allowed";
-    }
-    //validate city & country
-    if ((!ctype_alpha(str_replace(' ', '', $_SESSION['city']))) || (!ctype_alpha(str_replace(' ', '', $_SESSION['country'])))) {
-        $_SESSION["country_er"] = "* Only Alphabets and White Space Are Allowed";
-    }
+    
     //validate childcategory
     if ($_SESSION["childcategoryId"] == "Choose childcategories...") {
         $_SESSION["childcat_er"] = " * Please Choose childcategory";
