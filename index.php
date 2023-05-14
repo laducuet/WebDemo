@@ -31,16 +31,18 @@
 <div class="container">
 		<main>
 			<div class="text-center">
-				<?php if(isset($_GET['keyword'])&&($inputSearchError)): ?>
+				<?php if(isset($_GET['keyword'])): ?>
+					<?php if ($inputSearchError) :?>
 					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">Enter a valid value!</p>
-				<?php elseif(isset($_GET['keyword'])&&($noItemsSearch)): ?>
+					<?php elseif(($noItemsSearch)): ?>
 					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items match this word
-				<?php echo " " .$_GET['keyword']; ?> </p>
-				<?php elseif($noItems): ?>
+						<?php echo " " .$_GET['keyword']; ?> </p>
+					<?php elseif($noItems): ?>
 					<p class="alert-danger ms-auto me-auto pt-5 pb-5" style="width:50%">No items in this Category</p>
-				<?php else: ?>
-
-				<?php endif ?>
+					<?php else: ?>
+						<?php header("Location: searchItem.php?keyword=".$_GET['keyword']); ?>
+					<?php endif ?>
+				<?php else : ?>
 			<div class="breadcrumb">
 			</div> <!-- End of Breadcrumb-->
 
@@ -82,7 +84,8 @@
 			</div> <!-- New Product Section -->	
 			<div class="load-more">
 				<a href="#">Load More</a>
-			</div>		
+			</div>	
+			<?php endif ?>	
 		</main> <!-- Main Area -->
 	</div>
 <?php
