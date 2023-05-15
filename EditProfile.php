@@ -63,7 +63,7 @@ if (!isset($_SESSION['password_checked'])) {
         <div class="col-lg-5 col-md-12">
             <form method="POST" action="EditProfile.php" class="form-signin p-5">
                 <h3 class="m-3">Enter your password</h3>
-                <p class="lead m-3"> Dawrha </p>
+                <p class="lead m-3"> Team 9 </p>
                 <div class="input-group mb-4">
                     <input type="password" required id="password" class="form-control" placeholder="Password"
                            name="password">

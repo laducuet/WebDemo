@@ -56,7 +56,7 @@
                         ?>
                         </span>
                       </p>
-                      <div class="tshirt_img">
+                      <div class="tshirt_img" style="line-height: 270px;">
                           <img src="<?php
                             $image_path = "layout/images/" . $childcat['childcategoryName'] . ".jpg";
                             echo $image_path;

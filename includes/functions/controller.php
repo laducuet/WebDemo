@@ -489,7 +489,7 @@ function getOrderPrice($id, $db)
 
 function getSellerForSaleItems($id, $db)
 {
-    $sql = "SELECT * FROM seller,item WHERE seller.ID = item.sellerId AND item.isDeleted = 0 AND item.quantity != 0 AND seller.ID = :id";
+    $sql = "SELECT * FROM seller,item WHERE seller.ID = item.sellerId AND item.isDeleted = 0 AND item.quantity > 0 AND seller.ID = :id";
     $stmt = $db->prepare($sql);
     $stmt->execute(array(":id" => $id));
     $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
@@ -507,7 +507,7 @@ function getSellerDeletedItems($id, $db)
 
 function getSellerSoldOutItems($id, $db)
 {
-    $sql = "SELECT * FROM seller,item WHERE seller.ID = item.sellerId AND item.isDeleted = 0 AND item.quantity = 0  AND seller.ID = :id";
+    $sql = "SELECT * FROM seller,item WHERE seller.ID = item.sellerId AND item.isDeleted = 0 AND item.quantity <= 0  AND seller.ID = :id";
     $stmt = $db->prepare($sql);
     $stmt->execute(array(":id" => $id));
     $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
